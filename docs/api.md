@@ -28,9 +28,9 @@ Use the [interactive docs](https://fomo-public.pootracker.app/docs) to try every
 | GET | `/healthz` | Database/service health |
 | WS | `/v2/stream` | Live thesis subscriptions |
 
-Profiles have a one-second freshness window. Responses include `X-Cache-Status: YES` for a profile cache hit, or `NO` after an upstream fetch. Wallet lookup can resolve only wallets already linked to indexed users. Indexed search accepts a literal substring of 2–64 characters and a limit of 1–100 (default 20); it is not a complete directory of every Fomo account.
+GET responses have a one-second profile cache and a three-second cache for other data routes. Expired responses are returned immediately while a background refresh runs. Indexed fallback is available during upstream failures and is marked `X-Data-Stale: true`. `X-Cache-Status: YES` identifies a cache/index response; `NO` identifies an upstream fetch. `X-Cache-Age-Ms` is the response-cache age when available, and `X-Total-Time` is processing time before the response headers, with an `ms` suffix.
 
-Thesis reads always fetch Fomo first, then return an indexed page. User reads refresh Fomo's spotlight, which is not a full user timeline. The `source` and `coverage` fields identify the combined data. An upstream failure is returned as an error, not hidden behind stale data. HTTP `502` generally means the upstream is unavailable; upstream rate limits produce `503` and, when supplied, `Retry-After`.
+User theses refresh the Fomo spotlight and combine it with partial indexed history. Token and global requests refresh their corresponding source feeds. These are not complete historical datasets. Wallet lookups need an indexed wallet link. User search matches indexed handles and display names, using a literal substring of 2–64 characters and a limit of 1–100 (default 20).
 
 Feed pages accept `before`, the preceding page's `nextBefore`. An unknown cursor or a cursor from a different user/token filter returns `400`. User and token IDs preserve their original case; EVM addresses are normalized to lowercase. Handles are case-insensitive and accept a leading `@`.
 

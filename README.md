@@ -55,9 +55,11 @@ if (page.hasMore && page.nextBefore) {
 
 All endpoints share **1,000 requests per IP per rolling five minutes**. HTTP `429` includes `Retry-After` in seconds. `X-RateLimit-Limit`, `X-RateLimit-Remaining`, and `X-RateLimit-Reset` report the allowance and the Unix timestamp when the next slot becomes available.
 
-Profile lookups use the index only when the profile was updated less than one second ago; otherwise they refresh from Fomo. `X-Cache-Status: YES` means a profile cache hit, and `NO` means a fresh upstream fetch. Thesis requests always contact Fomo before returning indexed results; upstream failures return an error rather than silently serving stale theses.
+GET responses use a bounded cache: one second for profiles and three seconds for other data routes. Expired responses can be returned immediately while a background refresh runs. During upstream throttling or outages, available indexed data remains readable with `X-Data-Stale: true`.
 
-User theses combine a fresh Fomo user spotlight with indexed history. The spotlight is not a complete user timeline. The response's `source` and `coverage` fields explain this, and `/v2/status` shows current indexing progress. PNL uses indexed Fomo swaps and has partial coverage; empty results or null PNL do not prove no activity.
+`X-Cache-Status: YES` means data came from a cache or the local index; `NO` means an upstream fetch. `X-Cache-Age-Ms` reports the response-cache age when available. `X-Total-Time` reports server processing time, such as `0.12ms`, excluding internet transit.
+
+User theses combine Fomo user spotlights with indexed history. A spotlight is not a complete user timeline. `source` and `coverage` describe the data; `/v2/status` shows indexing progress. PNL uses indexed Fomo swaps and has partial coverage.
 
 ## Live theses over WebSocket
 

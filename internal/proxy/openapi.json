@@ -256,7 +256,22 @@
                     "NO"
                   ]
                 },
-                "description": "YES for a profile served within its one-second cache window; NO when Fomo was fetched. Theses always fetch Fomo."
+                "description": "YES for a cached or indexed response; NO for an upstream fetch."
+              },
+              "X-Total-Time": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Server processing time before response headers, with an ms suffix."
+              },
+              "X-Data-Stale": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "true"
+                  ]
+                },
+                "description": "Present when stale data is served while refreshing or during an upstream failure."
               }
             }
           },
@@ -268,6 +283,21 @@
                   "type": "integer"
                 },
                 "description": "Seconds to wait"
+              },
+              "X-Total-Time": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Server processing time before response headers, with an ms suffix."
+              },
+              "X-Data-Stale": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "true"
+                  ]
+                },
+                "description": "Present when stale data is served while refreshing or during an upstream failure."
               }
             },
             "content": {
@@ -291,7 +321,7 @@
         "tags": [
           "Theses"
         ],
-        "description": "Always fetches Fomo before returning an indexed page. User routes refresh the Fomo spotlight, not a complete user timeline; token and global routes refresh their latest source feed. Pagination uses the partial local archive. Upstream failures return an error. X-Cache-Status is NO."
+        "description": "Returns indexed theses with a three-second response cache. Refreshes Fomo in the background after cache expiry. User routes refresh the spotlight, which is not a complete user timeline. During upstream failures, available indexed history is returned with X-Data-Stale: true."
       }
     },
     "/v2/users/handle/{handle}": {
@@ -433,7 +463,22 @@
                     "NO"
                   ]
                 },
-                "description": "YES for a profile served within its one-second cache window; NO when Fomo was fetched. Theses always fetch Fomo."
+                "description": "YES for a cached or indexed response; NO for an upstream fetch."
+              },
+              "X-Total-Time": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Server processing time before response headers, with an ms suffix."
+              },
+              "X-Data-Stale": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "true"
+                  ]
+                },
+                "description": "Present when stale data is served while refreshing or during an upstream failure."
               }
             }
           },
@@ -445,7 +490,24 @@
                 }
               }
             },
-            "description": "Response 404"
+            "description": "Response 404",
+            "headers": {
+              "X-Total-Time": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Server processing time before response headers, with an ms suffix."
+              },
+              "X-Data-Stale": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "true"
+                  ]
+                },
+                "description": "Present when stale data is served while refreshing or during an upstream failure."
+              }
+            }
           },
           "429": {
             "description": "The shared IP limit was reached. Wait Retry-After seconds before retrying.",
@@ -455,6 +517,21 @@
                   "type": "integer"
                 },
                 "description": "Seconds to wait"
+              },
+              "X-Total-Time": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Server processing time before response headers, with an ms suffix."
+              },
+              "X-Data-Stale": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "true"
+                  ]
+                },
+                "description": "Present when stale data is served while refreshing or during an upstream failure."
               }
             },
             "content": {
@@ -478,7 +555,7 @@
         "tags": [
           "Users"
         ],
-        "description": "Uses the indexed profile only when refreshed less than one second ago; otherwise fetches Fomo. X-Cache-Status is YES for a cache hit, NO for an upstream fetch. Wallet lookup requires a previously indexed wallet link."
+        "description": "One-second profile cache. Expired cached responses may be returned during background refresh. X-Cache-Status identifies cached/indexed responses. X-Data-Stale: true marks stale fallback."
       }
     },
     "/v2/users/id/{id}": {
@@ -618,7 +695,22 @@
                     "NO"
                   ]
                 },
-                "description": "YES for a profile served within its one-second cache window; NO when Fomo was fetched. Theses always fetch Fomo."
+                "description": "YES for a cached or indexed response; NO for an upstream fetch."
+              },
+              "X-Total-Time": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Server processing time before response headers, with an ms suffix."
+              },
+              "X-Data-Stale": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "true"
+                  ]
+                },
+                "description": "Present when stale data is served while refreshing or during an upstream failure."
               }
             }
           },
@@ -630,7 +722,24 @@
                 }
               }
             },
-            "description": "Response 404"
+            "description": "Response 404",
+            "headers": {
+              "X-Total-Time": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Server processing time before response headers, with an ms suffix."
+              },
+              "X-Data-Stale": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "true"
+                  ]
+                },
+                "description": "Present when stale data is served while refreshing or during an upstream failure."
+              }
+            }
           },
           "429": {
             "description": "The shared IP limit was reached. Wait Retry-After seconds before retrying.",
@@ -640,6 +749,21 @@
                   "type": "integer"
                 },
                 "description": "Seconds to wait"
+              },
+              "X-Total-Time": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Server processing time before response headers, with an ms suffix."
+              },
+              "X-Data-Stale": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "true"
+                  ]
+                },
+                "description": "Present when stale data is served while refreshing or during an upstream failure."
               }
             },
             "content": {
@@ -663,7 +787,7 @@
         "tags": [
           "Users"
         ],
-        "description": "Uses the indexed profile only when refreshed less than one second ago; otherwise fetches Fomo. X-Cache-Status is YES for a cache hit, NO for an upstream fetch. Wallet lookup requires a previously indexed wallet link."
+        "description": "One-second profile cache. Expired cached responses may be returned during background refresh. X-Cache-Status identifies cached/indexed responses. X-Data-Stale: true marks stale fallback."
       }
     },
     "/v2/users/wallet/{address}": {
@@ -804,7 +928,22 @@
                     "NO"
                   ]
                 },
-                "description": "YES for a profile served within its one-second cache window; NO when Fomo was fetched. Theses always fetch Fomo."
+                "description": "YES for a cached or indexed response; NO for an upstream fetch."
+              },
+              "X-Total-Time": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Server processing time before response headers, with an ms suffix."
+              },
+              "X-Data-Stale": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "true"
+                  ]
+                },
+                "description": "Present when stale data is served while refreshing or during an upstream failure."
               }
             }
           },
@@ -816,7 +955,24 @@
                 }
               }
             },
-            "description": "Response 404"
+            "description": "Response 404",
+            "headers": {
+              "X-Total-Time": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Server processing time before response headers, with an ms suffix."
+              },
+              "X-Data-Stale": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "true"
+                  ]
+                },
+                "description": "Present when stale data is served while refreshing or during an upstream failure."
+              }
+            }
           },
           "429": {
             "description": "The shared IP limit was reached. Wait Retry-After seconds before retrying.",
@@ -826,6 +982,21 @@
                   "type": "integer"
                 },
                 "description": "Seconds to wait"
+              },
+              "X-Total-Time": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Server processing time before response headers, with an ms suffix."
+              },
+              "X-Data-Stale": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "true"
+                  ]
+                },
+                "description": "Present when stale data is served while refreshing or during an upstream failure."
               }
             },
             "content": {
@@ -849,7 +1020,7 @@
         "tags": [
           "Users"
         ],
-        "description": "Uses the indexed profile only when refreshed less than one second ago; otherwise fetches Fomo. X-Cache-Status is YES for a cache hit, NO for an upstream fetch. Wallet lookup requires a previously indexed wallet link."
+        "description": "One-second profile cache. Expired cached responses may be returned during background refresh. X-Cache-Status identifies cached/indexed responses. X-Data-Stale: true marks stale fallback."
       }
     },
     "/v2/users/handle/{handle}/resolve": {
@@ -991,7 +1162,22 @@
                     "NO"
                   ]
                 },
-                "description": "YES for a profile served within its one-second cache window; NO when Fomo was fetched. Theses always fetch Fomo."
+                "description": "YES for a cached or indexed response; NO for an upstream fetch."
+              },
+              "X-Total-Time": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Server processing time before response headers, with an ms suffix."
+              },
+              "X-Data-Stale": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "true"
+                  ]
+                },
+                "description": "Present when stale data is served while refreshing or during an upstream failure."
               }
             }
           },
@@ -1035,7 +1221,24 @@
                 }
               }
             },
-            "description": "Response 202"
+            "description": "Response 202",
+            "headers": {
+              "X-Total-Time": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Server processing time before response headers, with an ms suffix."
+              },
+              "X-Data-Stale": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "true"
+                  ]
+                },
+                "description": "Present when stale data is served while refreshing or during an upstream failure."
+              }
+            }
           },
           "404": {
             "content": {
@@ -1045,7 +1248,24 @@
                 }
               }
             },
-            "description": "Response 404"
+            "description": "Response 404",
+            "headers": {
+              "X-Total-Time": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Server processing time before response headers, with an ms suffix."
+              },
+              "X-Data-Stale": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "true"
+                  ]
+                },
+                "description": "Present when stale data is served while refreshing or during an upstream failure."
+              }
+            }
           },
           "429": {
             "description": "The shared IP limit was reached. Wait Retry-After seconds before retrying.",
@@ -1055,6 +1275,21 @@
                   "type": "integer"
                 },
                 "description": "Seconds to wait"
+              },
+              "X-Total-Time": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Server processing time before response headers, with an ms suffix."
+              },
+              "X-Data-Stale": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "true"
+                  ]
+                },
+                "description": "Present when stale data is served while refreshing or during an upstream failure."
               }
             },
             "content": {
@@ -1296,7 +1531,22 @@
                     "NO"
                   ]
                 },
-                "description": "YES for a profile served within its one-second cache window; NO when Fomo was fetched. Theses always fetch Fomo."
+                "description": "YES for a cached or indexed response; NO for an upstream fetch."
+              },
+              "X-Total-Time": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Server processing time before response headers, with an ms suffix."
+              },
+              "X-Data-Stale": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "true"
+                  ]
+                },
+                "description": "Present when stale data is served while refreshing or during an upstream failure."
               }
             }
           },
@@ -1308,7 +1558,24 @@
                 }
               }
             },
-            "description": "Response 404"
+            "description": "Response 404",
+            "headers": {
+              "X-Total-Time": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Server processing time before response headers, with an ms suffix."
+              },
+              "X-Data-Stale": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "true"
+                  ]
+                },
+                "description": "Present when stale data is served while refreshing or during an upstream failure."
+              }
+            }
           },
           "429": {
             "description": "The shared IP limit was reached. Wait Retry-After seconds before retrying.",
@@ -1318,6 +1585,21 @@
                   "type": "integer"
                 },
                 "description": "Seconds to wait"
+              },
+              "X-Total-Time": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Server processing time before response headers, with an ms suffix."
+              },
+              "X-Data-Stale": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "true"
+                  ]
+                },
+                "description": "Present when stale data is served while refreshing or during an upstream failure."
               }
             },
             "content": {
@@ -1567,7 +1849,22 @@
                     "NO"
                   ]
                 },
-                "description": "YES for a profile served within its one-second cache window; NO when Fomo was fetched. Theses always fetch Fomo."
+                "description": "YES for a cached or indexed response; NO for an upstream fetch."
+              },
+              "X-Total-Time": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Server processing time before response headers, with an ms suffix."
+              },
+              "X-Data-Stale": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "true"
+                  ]
+                },
+                "description": "Present when stale data is served while refreshing or during an upstream failure."
               }
             }
           },
@@ -1579,6 +1876,21 @@
                   "type": "integer"
                 },
                 "description": "Seconds to wait"
+              },
+              "X-Total-Time": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Server processing time before response headers, with an ms suffix."
+              },
+              "X-Data-Stale": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "true"
+                  ]
+                },
+                "description": "Present when stale data is served while refreshing or during an upstream failure."
               }
             },
             "content": {
@@ -1602,7 +1914,7 @@
         "tags": [
           "Theses"
         ],
-        "description": "Always fetches Fomo before returning an indexed page. User routes refresh the Fomo spotlight, not a complete user timeline; token and global routes refresh their latest source feed. Pagination uses the partial local archive. Upstream failures return an error. X-Cache-Status is NO."
+        "description": "Returns indexed theses with a three-second response cache. Refreshes Fomo in the background after cache expiry. User routes refresh the spotlight, which is not a complete user timeline. During upstream failures, available indexed history is returned with X-Data-Stale: true."
       }
     },
     "/v2/tokens/{tokenAddress}/theses": {
@@ -1862,7 +2174,22 @@
                     "NO"
                   ]
                 },
-                "description": "YES for a profile served within its one-second cache window; NO when Fomo was fetched. Theses always fetch Fomo."
+                "description": "YES for a cached or indexed response; NO for an upstream fetch."
+              },
+              "X-Total-Time": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Server processing time before response headers, with an ms suffix."
+              },
+              "X-Data-Stale": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "true"
+                  ]
+                },
+                "description": "Present when stale data is served while refreshing or during an upstream failure."
               }
             }
           },
@@ -1874,6 +2201,21 @@
                   "type": "integer"
                 },
                 "description": "Seconds to wait"
+              },
+              "X-Total-Time": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Server processing time before response headers, with an ms suffix."
+              },
+              "X-Data-Stale": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "true"
+                  ]
+                },
+                "description": "Present when stale data is served while refreshing or during an upstream failure."
               }
             },
             "content": {
@@ -1897,7 +2239,7 @@
         "tags": [
           "Theses"
         ],
-        "description": "Always fetches Fomo before returning an indexed page. User routes refresh the Fomo spotlight, not a complete user timeline; token and global routes refresh their latest source feed. Pagination uses the partial local archive. Upstream failures return an error. X-Cache-Status is NO."
+        "description": "Returns indexed theses with a three-second response cache. Refreshes Fomo in the background after cache expiry. User routes refresh the spotlight, which is not a complete user timeline. During upstream failures, available indexed history is returned with X-Data-Stale: true."
       }
     },
     "/v2/users/id/{id}/theses": {
@@ -2143,7 +2485,22 @@
                     "NO"
                   ]
                 },
-                "description": "YES for a profile served within its one-second cache window; NO when Fomo was fetched. Theses always fetch Fomo."
+                "description": "YES for a cached or indexed response; NO for an upstream fetch."
+              },
+              "X-Total-Time": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Server processing time before response headers, with an ms suffix."
+              },
+              "X-Data-Stale": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "true"
+                  ]
+                },
+                "description": "Present when stale data is served while refreshing or during an upstream failure."
               }
             }
           },
@@ -2155,6 +2512,21 @@
                   "type": "integer"
                 },
                 "description": "Seconds to wait"
+              },
+              "X-Total-Time": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Server processing time before response headers, with an ms suffix."
+              },
+              "X-Data-Stale": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "true"
+                  ]
+                },
+                "description": "Present when stale data is served while refreshing or during an upstream failure."
               }
             },
             "content": {
@@ -2178,7 +2550,7 @@
         "tags": [
           "Theses"
         ],
-        "description": "Always fetches Fomo before returning an indexed page. User routes refresh the Fomo spotlight, not a complete user timeline; token and global routes refresh their latest source feed. Pagination uses the partial local archive. Upstream failures return an error. X-Cache-Status is NO."
+        "description": "Returns indexed theses with a three-second response cache. Refreshes Fomo in the background after cache expiry. User routes refresh the spotlight, which is not a complete user timeline. During upstream failures, available indexed history is returned with X-Data-Stale: true."
       }
     },
     "/v2/users/id/{id}/tokens/{tokenAddress}/theses": {
@@ -2432,7 +2804,22 @@
                     "NO"
                   ]
                 },
-                "description": "YES for a profile served within its one-second cache window; NO when Fomo was fetched. Theses always fetch Fomo."
+                "description": "YES for a cached or indexed response; NO for an upstream fetch."
+              },
+              "X-Total-Time": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Server processing time before response headers, with an ms suffix."
+              },
+              "X-Data-Stale": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "true"
+                  ]
+                },
+                "description": "Present when stale data is served while refreshing or during an upstream failure."
               }
             }
           },
@@ -2444,6 +2831,21 @@
                   "type": "integer"
                 },
                 "description": "Seconds to wait"
+              },
+              "X-Total-Time": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Server processing time before response headers, with an ms suffix."
+              },
+              "X-Data-Stale": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "true"
+                  ]
+                },
+                "description": "Present when stale data is served while refreshing or during an upstream failure."
               }
             },
             "content": {
@@ -2467,7 +2869,7 @@
         "tags": [
           "Theses"
         ],
-        "description": "Always fetches Fomo before returning an indexed page. User routes refresh the Fomo spotlight, not a complete user timeline; token and global routes refresh their latest source feed. Pagination uses the partial local archive. Upstream failures return an error. X-Cache-Status is NO."
+        "description": "Returns indexed theses with a three-second response cache. Refreshes Fomo in the background after cache expiry. User routes refresh the spotlight, which is not a complete user timeline. During upstream failures, available indexed history is returned with X-Data-Stale: true."
       }
     },
     "/v2/leaderboards/trader-pnl": {
@@ -2639,6 +3041,21 @@
                   "type": "integer"
                 },
                 "description": "Unix timestamp when the oldest accepted request leaves the window"
+              },
+              "X-Total-Time": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Server processing time before response headers, with an ms suffix."
+              },
+              "X-Data-Stale": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "true"
+                  ]
+                },
+                "description": "Present when stale data is served while refreshing or during an upstream failure."
               }
             }
           },
@@ -2650,6 +3067,21 @@
                   "type": "integer"
                 },
                 "description": "Seconds to wait"
+              },
+              "X-Total-Time": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Server processing time before response headers, with an ms suffix."
+              },
+              "X-Data-Stale": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "true"
+                  ]
+                },
+                "description": "Present when stale data is served while refreshing or during an upstream failure."
               }
             },
             "content": {
@@ -2846,6 +3278,21 @@
                   "type": "integer"
                 },
                 "description": "Unix timestamp when the oldest accepted request leaves the window"
+              },
+              "X-Total-Time": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Server processing time before response headers, with an ms suffix."
+              },
+              "X-Data-Stale": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "true"
+                  ]
+                },
+                "description": "Present when stale data is served while refreshing or during an upstream failure."
               }
             }
           },
@@ -2857,6 +3304,21 @@
                   "type": "integer"
                 },
                 "description": "Seconds to wait"
+              },
+              "X-Total-Time": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Server processing time before response headers, with an ms suffix."
+              },
+              "X-Data-Stale": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "true"
+                  ]
+                },
+                "description": "Present when stale data is served while refreshing or during an upstream failure."
               }
             },
             "content": {
@@ -3051,6 +3513,21 @@
                   "type": "integer"
                 },
                 "description": "Unix timestamp when the oldest accepted request leaves the window"
+              },
+              "X-Total-Time": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Server processing time before response headers, with an ms suffix."
+              },
+              "X-Data-Stale": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "true"
+                  ]
+                },
+                "description": "Present when stale data is served while refreshing or during an upstream failure."
               }
             }
           },
@@ -3062,6 +3539,21 @@
                   "type": "integer"
                 },
                 "description": "Seconds to wait"
+              },
+              "X-Total-Time": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Server processing time before response headers, with an ms suffix."
+              },
+              "X-Data-Stale": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "true"
+                  ]
+                },
+                "description": "Present when stale data is served while refreshing or during an upstream failure."
               }
             },
             "content": {
@@ -3243,6 +3735,21 @@
                   "type": "integer"
                 },
                 "description": "Unix timestamp when the oldest accepted request leaves the window"
+              },
+              "X-Total-Time": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Server processing time before response headers, with an ms suffix."
+              },
+              "X-Data-Stale": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "true"
+                  ]
+                },
+                "description": "Present when stale data is served while refreshing or during an upstream failure."
               }
             }
           },
@@ -3254,6 +3761,21 @@
                   "type": "integer"
                 },
                 "description": "Seconds to wait"
+              },
+              "X-Total-Time": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Server processing time before response headers, with an ms suffix."
+              },
+              "X-Data-Stale": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "true"
+                  ]
+                },
+                "description": "Present when stale data is served while refreshing or during an upstream failure."
               }
             },
             "content": {
@@ -3435,6 +3957,21 @@
                   "type": "integer"
                 },
                 "description": "Unix timestamp when the oldest accepted request leaves the window"
+              },
+              "X-Total-Time": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Server processing time before response headers, with an ms suffix."
+              },
+              "X-Data-Stale": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "true"
+                  ]
+                },
+                "description": "Present when stale data is served while refreshing or during an upstream failure."
               }
             }
           },
@@ -3446,6 +3983,21 @@
                   "type": "integer"
                 },
                 "description": "Seconds to wait"
+              },
+              "X-Total-Time": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Server processing time before response headers, with an ms suffix."
+              },
+              "X-Data-Stale": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "true"
+                  ]
+                },
+                "description": "Present when stale data is served while refreshing or during an upstream failure."
               }
             },
             "content": {
@@ -3627,6 +4179,21 @@
                   "type": "integer"
                 },
                 "description": "Unix timestamp when the oldest accepted request leaves the window"
+              },
+              "X-Total-Time": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Server processing time before response headers, with an ms suffix."
+              },
+              "X-Data-Stale": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "true"
+                  ]
+                },
+                "description": "Present when stale data is served while refreshing or during an upstream failure."
               }
             }
           },
@@ -3638,6 +4205,21 @@
                   "type": "integer"
                 },
                 "description": "Seconds to wait"
+              },
+              "X-Total-Time": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Server processing time before response headers, with an ms suffix."
+              },
+              "X-Data-Stale": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "true"
+                  ]
+                },
+                "description": "Present when stale data is served while refreshing or during an upstream failure."
               }
             },
             "content": {
@@ -3693,6 +4275,21 @@
                   "type": "integer"
                 },
                 "description": "Unix timestamp when the oldest accepted request leaves the window"
+              },
+              "X-Total-Time": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Server processing time before response headers, with an ms suffix."
+              },
+              "X-Data-Stale": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "true"
+                  ]
+                },
+                "description": "Present when stale data is served while refreshing or during an upstream failure."
               }
             }
           },
@@ -3704,6 +4301,21 @@
                   "type": "integer"
                 },
                 "description": "Seconds to wait"
+              },
+              "X-Total-Time": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Server processing time before response headers, with an ms suffix."
+              },
+              "X-Data-Stale": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "true"
+                  ]
+                },
+                "description": "Present when stale data is served while refreshing or during an upstream failure."
               }
             },
             "content": {
@@ -3733,13 +4345,64 @@
       "get": {
         "responses": {
           "101": {
-            "description": "Response 101"
+            "description": "Response 101",
+            "headers": {
+              "X-Total-Time": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Server processing time before response headers, with an ms suffix."
+              },
+              "X-Data-Stale": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "true"
+                  ]
+                },
+                "description": "Present when stale data is served while refreshing or during an upstream failure."
+              }
+            }
           },
           "401": {
-            "description": "Response 401"
+            "description": "Response 401",
+            "headers": {
+              "X-Total-Time": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Server processing time before response headers, with an ms suffix."
+              },
+              "X-Data-Stale": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "true"
+                  ]
+                },
+                "description": "Present when stale data is served while refreshing or during an upstream failure."
+              }
+            }
           },
           "404": {
-            "description": "Response 404"
+            "description": "Response 404",
+            "headers": {
+              "X-Total-Time": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Server processing time before response headers, with an ms suffix."
+              },
+              "X-Data-Stale": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "true"
+                  ]
+                },
+                "description": "Present when stale data is served while refreshing or during an upstream failure."
+              }
+            }
           },
           "429": {
             "description": "The shared IP limit was reached. Wait Retry-After seconds before retrying.",
@@ -3749,6 +4412,21 @@
                   "type": "integer"
                 },
                 "description": "Seconds to wait"
+              },
+              "X-Total-Time": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Server processing time before response headers, with an ms suffix."
+              },
+              "X-Data-Stale": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "true"
+                  ]
+                },
+                "description": "Present when stale data is served while refreshing or during an upstream failure."
               }
             },
             "content": {
@@ -3946,7 +4624,22 @@
                     "NO"
                   ]
                 },
-                "description": "YES for a profile served within its one-second cache window; NO when Fomo was fetched. Theses always fetch Fomo."
+                "description": "YES for a cached or indexed response; NO for an upstream fetch."
+              },
+              "X-Total-Time": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Server processing time before response headers, with an ms suffix."
+              },
+              "X-Data-Stale": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "true"
+                  ]
+                },
+                "description": "Present when stale data is served while refreshing or during an upstream failure."
               }
             }
           },
@@ -3958,6 +4651,21 @@
                   "type": "integer"
                 },
                 "description": "Seconds to wait"
+              },
+              "X-Total-Time": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Server processing time before response headers, with an ms suffix."
+              },
+              "X-Data-Stale": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "true"
+                  ]
+                },
+                "description": "Present when stale data is served while refreshing or during an upstream failure."
               }
             },
             "content": {
@@ -4118,7 +4826,22 @@
                     "NO"
                   ]
                 },
-                "description": "YES for a profile served within its one-second cache window; NO when Fomo was fetched. Theses always fetch Fomo."
+                "description": "YES for a cached or indexed response; NO for an upstream fetch."
+              },
+              "X-Total-Time": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Server processing time before response headers, with an ms suffix."
+              },
+              "X-Data-Stale": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "true"
+                  ]
+                },
+                "description": "Present when stale data is served while refreshing or during an upstream failure."
               }
             }
           },
@@ -4130,7 +4853,24 @@
                 }
               }
             },
-            "description": "Response 404"
+            "description": "Response 404",
+            "headers": {
+              "X-Total-Time": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Server processing time before response headers, with an ms suffix."
+              },
+              "X-Data-Stale": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "true"
+                  ]
+                },
+                "description": "Present when stale data is served while refreshing or during an upstream failure."
+              }
+            }
           },
           "429": {
             "description": "The shared IP limit was reached. Wait Retry-After seconds before retrying.",
@@ -4140,6 +4880,21 @@
                   "type": "integer"
                 },
                 "description": "Seconds to wait"
+              },
+              "X-Total-Time": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Server processing time before response headers, with an ms suffix."
+              },
+              "X-Data-Stale": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "true"
+                  ]
+                },
+                "description": "Present when stale data is served while refreshing or during an upstream failure."
               }
             },
             "content": {
@@ -4164,7 +4919,7 @@
           "Compatibility"
         ],
         "summary": "Compatibility: Get a user by handle",
-        "description": "Uses the indexed profile only when refreshed less than one second ago; otherwise fetches Fomo. X-Cache-Status is YES for a cache hit, NO for an upstream fetch. Wallet lookup requires a previously indexed wallet link."
+        "description": "One-second profile cache. Expired cached responses may be returned during background refresh. X-Cache-Status identifies cached/indexed responses. X-Data-Stale: true marks stale fallback."
       }
     },
     "/v2/user/wallet/{address}": {
@@ -4305,7 +5060,22 @@
                     "NO"
                   ]
                 },
-                "description": "YES for a profile served within its one-second cache window; NO when Fomo was fetched. Theses always fetch Fomo."
+                "description": "YES for a cached or indexed response; NO for an upstream fetch."
+              },
+              "X-Total-Time": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Server processing time before response headers, with an ms suffix."
+              },
+              "X-Data-Stale": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "true"
+                  ]
+                },
+                "description": "Present when stale data is served while refreshing or during an upstream failure."
               }
             }
           },
@@ -4317,7 +5087,24 @@
                 }
               }
             },
-            "description": "Response 404"
+            "description": "Response 404",
+            "headers": {
+              "X-Total-Time": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Server processing time before response headers, with an ms suffix."
+              },
+              "X-Data-Stale": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "true"
+                  ]
+                },
+                "description": "Present when stale data is served while refreshing or during an upstream failure."
+              }
+            }
           },
           "429": {
             "description": "The shared IP limit was reached. Wait Retry-After seconds before retrying.",
@@ -4327,6 +5114,21 @@
                   "type": "integer"
                 },
                 "description": "Seconds to wait"
+              },
+              "X-Total-Time": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Server processing time before response headers, with an ms suffix."
+              },
+              "X-Data-Stale": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "true"
+                  ]
+                },
+                "description": "Present when stale data is served while refreshing or during an upstream failure."
               }
             },
             "content": {
@@ -4351,7 +5153,7 @@
           "Compatibility"
         ],
         "summary": "Compatibility: Find the user behind a wallet",
-        "description": "Uses the indexed profile only when refreshed less than one second ago; otherwise fetches Fomo. X-Cache-Status is YES for a cache hit, NO for an upstream fetch. Wallet lookup requires a previously indexed wallet link."
+        "description": "One-second profile cache. Expired cached responses may be returned during background refresh. X-Cache-Status identifies cached/indexed responses. X-Data-Stale: true marks stale fallback."
       }
     },
     "/v2/user/id/{id}": {
@@ -4491,7 +5293,22 @@
                     "NO"
                   ]
                 },
-                "description": "YES for a profile served within its one-second cache window; NO when Fomo was fetched. Theses always fetch Fomo."
+                "description": "YES for a cached or indexed response; NO for an upstream fetch."
+              },
+              "X-Total-Time": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Server processing time before response headers, with an ms suffix."
+              },
+              "X-Data-Stale": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "true"
+                  ]
+                },
+                "description": "Present when stale data is served while refreshing or during an upstream failure."
               }
             }
           },
@@ -4503,7 +5320,24 @@
                 }
               }
             },
-            "description": "Response 404"
+            "description": "Response 404",
+            "headers": {
+              "X-Total-Time": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Server processing time before response headers, with an ms suffix."
+              },
+              "X-Data-Stale": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "true"
+                  ]
+                },
+                "description": "Present when stale data is served while refreshing or during an upstream failure."
+              }
+            }
           },
           "429": {
             "description": "The shared IP limit was reached. Wait Retry-After seconds before retrying.",
@@ -4513,6 +5347,21 @@
                   "type": "integer"
                 },
                 "description": "Seconds to wait"
+              },
+              "X-Total-Time": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Server processing time before response headers, with an ms suffix."
+              },
+              "X-Data-Stale": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "true"
+                  ]
+                },
+                "description": "Present when stale data is served while refreshing or during an upstream failure."
               }
             },
             "content": {
@@ -4537,7 +5386,7 @@
           "Compatibility"
         ],
         "summary": "Compatibility: Get a user by ID",
-        "description": "Uses the indexed profile only when refreshed less than one second ago; otherwise fetches Fomo. X-Cache-Status is YES for a cache hit, NO for an upstream fetch. Wallet lookup requires a previously indexed wallet link."
+        "description": "One-second profile cache. Expired cached responses may be returned during background refresh. X-Cache-Status identifies cached/indexed responses. X-Data-Stale: true marks stale fallback."
       }
     },
     "/v2/user/handle/{handle}/resolve": {
@@ -4679,7 +5528,22 @@
                     "NO"
                   ]
                 },
-                "description": "YES for a profile served within its one-second cache window; NO when Fomo was fetched. Theses always fetch Fomo."
+                "description": "YES for a cached or indexed response; NO for an upstream fetch."
+              },
+              "X-Total-Time": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Server processing time before response headers, with an ms suffix."
+              },
+              "X-Data-Stale": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "true"
+                  ]
+                },
+                "description": "Present when stale data is served while refreshing or during an upstream failure."
               }
             }
           },
@@ -4723,7 +5587,24 @@
                 }
               }
             },
-            "description": "Response 202"
+            "description": "Response 202",
+            "headers": {
+              "X-Total-Time": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Server processing time before response headers, with an ms suffix."
+              },
+              "X-Data-Stale": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "true"
+                  ]
+                },
+                "description": "Present when stale data is served while refreshing or during an upstream failure."
+              }
+            }
           },
           "404": {
             "content": {
@@ -4733,7 +5614,24 @@
                 }
               }
             },
-            "description": "Response 404"
+            "description": "Response 404",
+            "headers": {
+              "X-Total-Time": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Server processing time before response headers, with an ms suffix."
+              },
+              "X-Data-Stale": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "true"
+                  ]
+                },
+                "description": "Present when stale data is served while refreshing or during an upstream failure."
+              }
+            }
           },
           "429": {
             "description": "The shared IP limit was reached. Wait Retry-After seconds before retrying.",
@@ -4743,6 +5641,21 @@
                   "type": "integer"
                 },
                 "description": "Seconds to wait"
+              },
+              "X-Total-Time": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Server processing time before response headers, with an ms suffix."
+              },
+              "X-Data-Stale": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "true"
+                  ]
+                },
+                "description": "Present when stale data is served while refreshing or during an upstream failure."
               }
             },
             "content": {
@@ -4985,7 +5898,22 @@
                     "NO"
                   ]
                 },
-                "description": "YES for a profile served within its one-second cache window; NO when Fomo was fetched. Theses always fetch Fomo."
+                "description": "YES for a cached or indexed response; NO for an upstream fetch."
+              },
+              "X-Total-Time": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Server processing time before response headers, with an ms suffix."
+              },
+              "X-Data-Stale": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "true"
+                  ]
+                },
+                "description": "Present when stale data is served while refreshing or during an upstream failure."
               }
             }
           },
@@ -4997,7 +5925,24 @@
                 }
               }
             },
-            "description": "Response 404"
+            "description": "Response 404",
+            "headers": {
+              "X-Total-Time": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Server processing time before response headers, with an ms suffix."
+              },
+              "X-Data-Stale": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "true"
+                  ]
+                },
+                "description": "Present when stale data is served while refreshing or during an upstream failure."
+              }
+            }
           },
           "429": {
             "description": "The shared IP limit was reached. Wait Retry-After seconds before retrying.",
@@ -5007,6 +5952,21 @@
                   "type": "integer"
                 },
                 "description": "Seconds to wait"
+              },
+              "X-Total-Time": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Server processing time before response headers, with an ms suffix."
+              },
+              "X-Data-Stale": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "true"
+                  ]
+                },
+                "description": "Present when stale data is served while refreshing or during an upstream failure."
               }
             },
             "content": {
@@ -5257,7 +6217,22 @@
                     "NO"
                   ]
                 },
-                "description": "YES for a profile served within its one-second cache window; NO when Fomo was fetched. Theses always fetch Fomo."
+                "description": "YES for a cached or indexed response; NO for an upstream fetch."
+              },
+              "X-Total-Time": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Server processing time before response headers, with an ms suffix."
+              },
+              "X-Data-Stale": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "true"
+                  ]
+                },
+                "description": "Present when stale data is served while refreshing or during an upstream failure."
               }
             }
           },
@@ -5269,6 +6244,21 @@
                   "type": "integer"
                 },
                 "description": "Seconds to wait"
+              },
+              "X-Total-Time": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Server processing time before response headers, with an ms suffix."
+              },
+              "X-Data-Stale": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "true"
+                  ]
+                },
+                "description": "Present when stale data is served while refreshing or during an upstream failure."
               }
             },
             "content": {
@@ -5293,7 +6283,7 @@
           "Compatibility"
         ],
         "summary": "Compatibility: Browse the thesis feed",
-        "description": "Always fetches Fomo before returning an indexed page. User routes refresh the Fomo spotlight, not a complete user timeline; token and global routes refresh their latest source feed. Pagination uses the partial local archive. Upstream failures return an error. X-Cache-Status is NO."
+        "description": "Returns indexed theses with a three-second response cache. Refreshes Fomo in the background after cache expiry. User routes refresh the spotlight, which is not a complete user timeline. During upstream failures, available indexed history is returned with X-Data-Stale: true."
       }
     },
     "/v2/thesis/token/{tokenAddress}": {
@@ -5553,7 +6543,22 @@
                     "NO"
                   ]
                 },
-                "description": "YES for a profile served within its one-second cache window; NO when Fomo was fetched. Theses always fetch Fomo."
+                "description": "YES for a cached or indexed response; NO for an upstream fetch."
+              },
+              "X-Total-Time": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Server processing time before response headers, with an ms suffix."
+              },
+              "X-Data-Stale": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "true"
+                  ]
+                },
+                "description": "Present when stale data is served while refreshing or during an upstream failure."
               }
             }
           },
@@ -5565,6 +6570,21 @@
                   "type": "integer"
                 },
                 "description": "Seconds to wait"
+              },
+              "X-Total-Time": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Server processing time before response headers, with an ms suffix."
+              },
+              "X-Data-Stale": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "true"
+                  ]
+                },
+                "description": "Present when stale data is served while refreshing or during an upstream failure."
               }
             },
             "content": {
@@ -5589,7 +6609,7 @@
           "Compatibility"
         ],
         "summary": "Compatibility: Get theses about a token",
-        "description": "Always fetches Fomo before returning an indexed page. User routes refresh the Fomo spotlight, not a complete user timeline; token and global routes refresh their latest source feed. Pagination uses the partial local archive. Upstream failures return an error. X-Cache-Status is NO."
+        "description": "Returns indexed theses with a three-second response cache. Refreshes Fomo in the background after cache expiry. User routes refresh the spotlight, which is not a complete user timeline. During upstream failures, available indexed history is returned with X-Data-Stale: true."
       }
     },
     "/v2/thesis/user/{id}": {
@@ -5835,7 +6855,22 @@
                     "NO"
                   ]
                 },
-                "description": "YES for a profile served within its one-second cache window; NO when Fomo was fetched. Theses always fetch Fomo."
+                "description": "YES for a cached or indexed response; NO for an upstream fetch."
+              },
+              "X-Total-Time": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Server processing time before response headers, with an ms suffix."
+              },
+              "X-Data-Stale": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "true"
+                  ]
+                },
+                "description": "Present when stale data is served while refreshing or during an upstream failure."
               }
             }
           },
@@ -5847,6 +6882,21 @@
                   "type": "integer"
                 },
                 "description": "Seconds to wait"
+              },
+              "X-Total-Time": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Server processing time before response headers, with an ms suffix."
+              },
+              "X-Data-Stale": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "true"
+                  ]
+                },
+                "description": "Present when stale data is served while refreshing or during an upstream failure."
               }
             },
             "content": {
@@ -5871,7 +6921,7 @@
           "Compatibility"
         ],
         "summary": "Compatibility: Get a user’s theses by ID",
-        "description": "Always fetches Fomo before returning an indexed page. User routes refresh the Fomo spotlight, not a complete user timeline; token and global routes refresh their latest source feed. Pagination uses the partial local archive. Upstream failures return an error. X-Cache-Status is NO."
+        "description": "Returns indexed theses with a three-second response cache. Refreshes Fomo in the background after cache expiry. User routes refresh the spotlight, which is not a complete user timeline. During upstream failures, available indexed history is returned with X-Data-Stale: true."
       }
     },
     "/v2/thesis/user/{id}/token/{tokenAddress}": {
@@ -6125,7 +7175,22 @@
                     "NO"
                   ]
                 },
-                "description": "YES for a profile served within its one-second cache window; NO when Fomo was fetched. Theses always fetch Fomo."
+                "description": "YES for a cached or indexed response; NO for an upstream fetch."
+              },
+              "X-Total-Time": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Server processing time before response headers, with an ms suffix."
+              },
+              "X-Data-Stale": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "true"
+                  ]
+                },
+                "description": "Present when stale data is served while refreshing or during an upstream failure."
               }
             }
           },
@@ -6137,6 +7202,21 @@
                   "type": "integer"
                 },
                 "description": "Seconds to wait"
+              },
+              "X-Total-Time": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Server processing time before response headers, with an ms suffix."
+              },
+              "X-Data-Stale": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "true"
+                  ]
+                },
+                "description": "Present when stale data is served while refreshing or during an upstream failure."
               }
             },
             "content": {
@@ -6161,7 +7241,7 @@
           "Compatibility"
         ],
         "summary": "Compatibility: Get a user’s theses about a token",
-        "description": "Always fetches Fomo before returning an indexed page. User routes refresh the Fomo spotlight, not a complete user timeline; token and global routes refresh their latest source feed. Pagination uses the partial local archive. Upstream failures return an error. X-Cache-Status is NO."
+        "description": "Returns indexed theses with a three-second response cache. Refreshes Fomo in the background after cache expiry. User routes refresh the spotlight, which is not a complete user timeline. During upstream failures, available indexed history is returned with X-Data-Stale: true."
       }
     },
     "/v2/leaderboard/traders-fomoscan": {
@@ -6333,6 +7413,21 @@
                   "type": "integer"
                 },
                 "description": "Unix timestamp when the oldest accepted request leaves the window"
+              },
+              "X-Total-Time": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Server processing time before response headers, with an ms suffix."
+              },
+              "X-Data-Stale": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "true"
+                  ]
+                },
+                "description": "Present when stale data is served while refreshing or during an upstream failure."
               }
             }
           },
@@ -6344,6 +7439,21 @@
                   "type": "integer"
                 },
                 "description": "Seconds to wait"
+              },
+              "X-Total-Time": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Server processing time before response headers, with an ms suffix."
+              },
+              "X-Data-Stale": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "true"
+                  ]
+                },
+                "description": "Present when stale data is served while refreshing or during an upstream failure."
               }
             },
             "content": {
@@ -6541,6 +7651,21 @@
                   "type": "integer"
                 },
                 "description": "Unix timestamp when the oldest accepted request leaves the window"
+              },
+              "X-Total-Time": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Server processing time before response headers, with an ms suffix."
+              },
+              "X-Data-Stale": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "true"
+                  ]
+                },
+                "description": "Present when stale data is served while refreshing or during an upstream failure."
               }
             }
           },
@@ -6552,6 +7677,21 @@
                   "type": "integer"
                 },
                 "description": "Seconds to wait"
+              },
+              "X-Total-Time": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Server processing time before response headers, with an ms suffix."
+              },
+              "X-Data-Stale": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "true"
+                  ]
+                },
+                "description": "Present when stale data is served while refreshing or during an upstream failure."
               }
             },
             "content": {
@@ -6748,6 +7888,21 @@
                   "type": "integer"
                 },
                 "description": "Unix timestamp when the oldest accepted request leaves the window"
+              },
+              "X-Total-Time": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Server processing time before response headers, with an ms suffix."
+              },
+              "X-Data-Stale": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "true"
+                  ]
+                },
+                "description": "Present when stale data is served while refreshing or during an upstream failure."
               }
             }
           },
@@ -6759,6 +7914,21 @@
                   "type": "integer"
                 },
                 "description": "Seconds to wait"
+              },
+              "X-Total-Time": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Server processing time before response headers, with an ms suffix."
+              },
+              "X-Data-Stale": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "true"
+                  ]
+                },
+                "description": "Present when stale data is served while refreshing or during an upstream failure."
               }
             },
             "content": {
@@ -6942,6 +8112,21 @@
                   "type": "integer"
                 },
                 "description": "Unix timestamp when the oldest accepted request leaves the window"
+              },
+              "X-Total-Time": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Server processing time before response headers, with an ms suffix."
+              },
+              "X-Data-Stale": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "true"
+                  ]
+                },
+                "description": "Present when stale data is served while refreshing or during an upstream failure."
               }
             }
           },
@@ -6953,6 +8138,21 @@
                   "type": "integer"
                 },
                 "description": "Seconds to wait"
+              },
+              "X-Total-Time": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Server processing time before response headers, with an ms suffix."
+              },
+              "X-Data-Stale": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "true"
+                  ]
+                },
+                "description": "Present when stale data is served while refreshing or during an upstream failure."
               }
             },
             "content": {
@@ -7136,6 +8336,21 @@
                   "type": "integer"
                 },
                 "description": "Unix timestamp when the oldest accepted request leaves the window"
+              },
+              "X-Total-Time": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Server processing time before response headers, with an ms suffix."
+              },
+              "X-Data-Stale": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "true"
+                  ]
+                },
+                "description": "Present when stale data is served while refreshing or during an upstream failure."
               }
             }
           },
@@ -7147,6 +8362,21 @@
                   "type": "integer"
                 },
                 "description": "Seconds to wait"
+              },
+              "X-Total-Time": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Server processing time before response headers, with an ms suffix."
+              },
+              "X-Data-Stale": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "true"
+                  ]
+                },
+                "description": "Present when stale data is served while refreshing or during an upstream failure."
               }
             },
             "content": {
@@ -7330,6 +8560,21 @@
                   "type": "integer"
                 },
                 "description": "Unix timestamp when the oldest accepted request leaves the window"
+              },
+              "X-Total-Time": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Server processing time before response headers, with an ms suffix."
+              },
+              "X-Data-Stale": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "true"
+                  ]
+                },
+                "description": "Present when stale data is served while refreshing or during an upstream failure."
               }
             }
           },
@@ -7341,6 +8586,21 @@
                   "type": "integer"
                 },
                 "description": "Seconds to wait"
+              },
+              "X-Total-Time": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Server processing time before response headers, with an ms suffix."
+              },
+              "X-Data-Stale": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "true"
+                  ]
+                },
+                "description": "Present when stale data is served while refreshing or during an upstream failure."
               }
             },
             "content": {
@@ -7398,6 +8658,21 @@
                   "type": "integer"
                 },
                 "description": "Unix timestamp when the oldest accepted request leaves the window"
+              },
+              "X-Total-Time": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Server processing time before response headers, with an ms suffix."
+              },
+              "X-Data-Stale": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "true"
+                  ]
+                },
+                "description": "Present when stale data is served while refreshing or during an upstream failure."
               }
             }
           },
@@ -7409,6 +8684,21 @@
                   "type": "integer"
                 },
                 "description": "Seconds to wait"
+              },
+              "X-Total-Time": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Server processing time before response headers, with an ms suffix."
+              },
+              "X-Data-Stale": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "true"
+                  ]
+                },
+                "description": "Present when stale data is served while refreshing or during an upstream failure."
               }
             },
             "content": {
@@ -7440,13 +8730,64 @@
       "get": {
         "responses": {
           "101": {
-            "description": "Response 101"
+            "description": "Response 101",
+            "headers": {
+              "X-Total-Time": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Server processing time before response headers, with an ms suffix."
+              },
+              "X-Data-Stale": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "true"
+                  ]
+                },
+                "description": "Present when stale data is served while refreshing or during an upstream failure."
+              }
+            }
           },
           "401": {
-            "description": "Response 401"
+            "description": "Response 401",
+            "headers": {
+              "X-Total-Time": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Server processing time before response headers, with an ms suffix."
+              },
+              "X-Data-Stale": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "true"
+                  ]
+                },
+                "description": "Present when stale data is served while refreshing or during an upstream failure."
+              }
+            }
           },
           "404": {
-            "description": "Response 404"
+            "description": "Response 404",
+            "headers": {
+              "X-Total-Time": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Server processing time before response headers, with an ms suffix."
+              },
+              "X-Data-Stale": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "true"
+                  ]
+                },
+                "description": "Present when stale data is served while refreshing or during an upstream failure."
+              }
+            }
           },
           "429": {
             "description": "The shared IP limit was reached. Wait Retry-After seconds before retrying.",
@@ -7456,6 +8797,21 @@
                   "type": "integer"
                 },
                 "description": "Seconds to wait"
+              },
+              "X-Total-Time": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Server processing time before response headers, with an ms suffix."
+              },
+              "X-Data-Stale": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "true"
+                  ]
+                },
+                "description": "Present when stale data is served while refreshing or during an upstream failure."
               }
             },
             "content": {
@@ -7506,6 +8862,21 @@
                   "type": "integer"
                 },
                 "description": "Unix timestamp when the oldest accepted request leaves the window"
+              },
+              "X-Total-Time": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Server processing time before response headers, with an ms suffix."
+              },
+              "X-Data-Stale": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "true"
+                  ]
+                },
+                "description": "Present when stale data is served while refreshing or during an upstream failure."
               }
             }
           },
@@ -7517,6 +8888,21 @@
                   "type": "integer"
                 },
                 "description": "Seconds to wait"
+              },
+              "X-Total-Time": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Server processing time before response headers, with an ms suffix."
+              },
+              "X-Data-Stale": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "true"
+                  ]
+                },
+                "description": "Present when stale data is served while refreshing or during an upstream failure."
               }
             },
             "content": {
@@ -7565,6 +8951,21 @@
                   "type": "integer"
                 },
                 "description": "Unix timestamp when the oldest accepted request leaves the window"
+              },
+              "X-Total-Time": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Server processing time before response headers, with an ms suffix."
+              },
+              "X-Data-Stale": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "true"
+                  ]
+                },
+                "description": "Present when stale data is served while refreshing or during an upstream failure."
               }
             }
           },
@@ -7576,6 +8977,21 @@
                   "type": "integer"
                 },
                 "description": "Seconds to wait"
+              },
+              "X-Total-Time": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Server processing time before response headers, with an ms suffix."
+              },
+              "X-Data-Stale": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "true"
+                  ]
+                },
+                "description": "Present when stale data is served while refreshing or during an upstream failure."
               }
             },
             "content": {
@@ -7842,7 +9258,22 @@
                     "NO"
                   ]
                 },
-                "description": "YES for a profile served within its one-second cache window; NO when Fomo was fetched. Theses always fetch Fomo."
+                "description": "YES for a cached or indexed response; NO for an upstream fetch."
+              },
+              "X-Total-Time": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Server processing time before response headers, with an ms suffix."
+              },
+              "X-Data-Stale": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "true"
+                  ]
+                },
+                "description": "Present when stale data is served while refreshing or during an upstream failure."
               }
             }
           },
@@ -7854,6 +9285,21 @@
                   "type": "integer"
                 },
                 "description": "Seconds to wait"
+              },
+              "X-Total-Time": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Server processing time before response headers, with an ms suffix."
+              },
+              "X-Data-Stale": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "true"
+                  ]
+                },
+                "description": "Present when stale data is served while refreshing or during an upstream failure."
               }
             },
             "content": {
@@ -7877,7 +9323,7 @@
         "tags": [
           "Compatibility"
         ],
-        "description": "Always fetches Fomo before returning an indexed page. User routes refresh the Fomo spotlight, not a complete user timeline; token and global routes refresh their latest source feed. Pagination uses the partial local archive. Upstream failures return an error. X-Cache-Status is NO.",
+        "description": "Returns indexed theses with a three-second response cache. Refreshes Fomo in the background after cache expiry. User routes refresh the spotlight, which is not a complete user timeline. During upstream failures, available indexed history is returned with X-Data-Stale: true.",
         "deprecated": true
       }
     },
@@ -8126,7 +9572,22 @@
                     "NO"
                   ]
                 },
-                "description": "YES for a profile served within its one-second cache window; NO when Fomo was fetched. Theses always fetch Fomo."
+                "description": "YES for a cached or indexed response; NO for an upstream fetch."
+              },
+              "X-Total-Time": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Server processing time before response headers, with an ms suffix."
+              },
+              "X-Data-Stale": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "true"
+                  ]
+                },
+                "description": "Present when stale data is served while refreshing or during an upstream failure."
               }
             }
           },
@@ -8138,6 +9599,21 @@
                   "type": "integer"
                 },
                 "description": "Seconds to wait"
+              },
+              "X-Total-Time": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Server processing time before response headers, with an ms suffix."
+              },
+              "X-Data-Stale": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "true"
+                  ]
+                },
+                "description": "Present when stale data is served while refreshing or during an upstream failure."
               }
             },
             "content": {
@@ -8161,7 +9637,7 @@
         "tags": [
           "Compatibility"
         ],
-        "description": "Always fetches Fomo before returning an indexed page. User routes refresh the Fomo spotlight, not a complete user timeline; token and global routes refresh their latest source feed. Pagination uses the partial local archive. Upstream failures return an error. X-Cache-Status is NO.",
+        "description": "Returns indexed theses with a three-second response cache. Refreshes Fomo in the background after cache expiry. User routes refresh the spotlight, which is not a complete user timeline. During upstream failures, available indexed history is returned with X-Data-Stale: true.",
         "deprecated": true
       }
     },
@@ -8181,6 +9657,23 @@
                   "type": "object"
                 }
               }
+            },
+            "headers": {
+              "X-Total-Time": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Server processing time before response headers, with an ms suffix."
+              },
+              "X-Data-Stale": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "true"
+                  ]
+                },
+                "description": "Present when stale data is served while refreshing or during an upstream failure."
+              }
             }
           },
           "429": {
@@ -8191,6 +9684,21 @@
                   "type": "integer"
                 },
                 "description": "Seconds to wait"
+              },
+              "X-Total-Time": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Server processing time before response headers, with an ms suffix."
+              },
+              "X-Data-Stale": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "true"
+                  ]
+                },
+                "description": "Present when stale data is served while refreshing or during an upstream failure."
               }
             },
             "content": {
