@@ -38,7 +38,7 @@ func TestRoutesAndRequestIsolation(t *testing.T) {
 			t.Errorf("%s: %d %s", route, w.Code, w.Body.String())
 		}
 	}
-	for _, path := range []string{"/v2/pump/thesis", "/admin/backfill", "/v2/unknown"} {
+	for _, path := range []string{"/v2/pump/thesis", "/admin/jobs", "/v2/unknown"} {
 		w := httptest.NewRecorder()
 		handler.ServeHTTP(w, httptest.NewRequest("GET", path, nil))
 		if w.Code != 404 {

@@ -30,7 +30,13 @@ if err != nil {
     return err
 }
 user, err := c.UserByHandle(ctx, "ogle")
+if err != nil {
+    return err
+}
 page, err := c.Theses(ctx, client.ThesisQuery{UserID: user.ID})
+if err != nil {
+    return err
+}
 ```
 
 Import `github.com/deladevsol/fomo-api/client`. Check errors after every call in your application. Nullable fields use pointers so missing data stays distinct from zero.

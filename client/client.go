@@ -55,7 +55,7 @@ func (c *Client) Request(ctx context.Context, method, path string, out any) erro
 		return fmt.Errorf("unsupported method")
 	}
 	u, e := url.Parse(path)
-	if e != nil || u.IsAbs() || u.Host != "" || !strings.HasPrefix(path, "/v2/") || strings.Contains(u.Path, "/pump/") {
+	if e != nil || u.IsAbs() || u.Host != "" || !strings.HasPrefix(path, "/v2/") || strings.HasPrefix(u.Path, "/v2/pump") {
 		return fmt.Errorf("expected a non-pump /v2/ API path")
 	}
 	req, e := http.NewRequestWithContext(ctx, method, c.base.String()+path, nil)
