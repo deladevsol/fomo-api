@@ -1,0 +1,2709 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Fomo API",
+    "version": "0.1.0",
+    "description": "Public Fomo profiles, wallets, theses, leaderboards and live events powered by PooTracker."
+  },
+  "servers": [
+    {
+      "url": "/"
+    }
+  ],
+  "paths": {
+    "/v2/user/handle/{handle}": {
+      "get": {
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 64
+            },
+            "in": "path",
+            "name": "handle",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "id",
+                    "handle",
+                    "name",
+                    "bio",
+                    "banner",
+                    "profilePicture",
+                    "twitter",
+                    "solanaAddress",
+                    "evmAddress"
+                  ],
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "format": "uuid"
+                    },
+                    "handle": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": [
+                        "null",
+                        "string"
+                      ]
+                    },
+                    "bio": {
+                      "type": [
+                        "null",
+                        "string"
+                      ]
+                    },
+                    "banner": {
+                      "type": [
+                        "null",
+                        "string"
+                      ]
+                    },
+                    "profilePicture": {
+                      "type": [
+                        "null",
+                        "string"
+                      ]
+                    },
+                    "twitter": {
+                      "type": [
+                        "null",
+                        "string"
+                      ]
+                    },
+                    "solanaAddress": {
+                      "type": [
+                        "null",
+                        "string"
+                      ]
+                    },
+                    "evmAddress": {
+                      "type": [
+                        "null",
+                        "string"
+                      ]
+                    },
+                    "socials": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "provider",
+                          "subject",
+                          "handle"
+                        ],
+                        "properties": {
+                          "provider": {
+                            "type": "string"
+                          },
+                          "subject": {
+                            "type": "string"
+                          },
+                          "handle": {
+                            "type": [
+                              "null",
+                              "string"
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Response 200"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/def-0"
+                }
+              }
+            },
+            "description": "Response 404"
+          }
+        }
+      }
+    },
+    "/v2/user/wallet/{address}": {
+      "get": {
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "in": "path",
+            "name": "address",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "id",
+                    "handle",
+                    "name",
+                    "bio",
+                    "banner",
+                    "profilePicture",
+                    "twitter",
+                    "solanaAddress",
+                    "evmAddress"
+                  ],
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "format": "uuid"
+                    },
+                    "handle": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": [
+                        "null",
+                        "string"
+                      ]
+                    },
+                    "bio": {
+                      "type": [
+                        "null",
+                        "string"
+                      ]
+                    },
+                    "banner": {
+                      "type": [
+                        "null",
+                        "string"
+                      ]
+                    },
+                    "profilePicture": {
+                      "type": [
+                        "null",
+                        "string"
+                      ]
+                    },
+                    "twitter": {
+                      "type": [
+                        "null",
+                        "string"
+                      ]
+                    },
+                    "solanaAddress": {
+                      "type": [
+                        "null",
+                        "string"
+                      ]
+                    },
+                    "evmAddress": {
+                      "type": [
+                        "null",
+                        "string"
+                      ]
+                    },
+                    "socials": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "provider",
+                          "subject",
+                          "handle"
+                        ],
+                        "properties": {
+                          "provider": {
+                            "type": "string"
+                          },
+                          "subject": {
+                            "type": "string"
+                          },
+                          "handle": {
+                            "type": [
+                              "null",
+                              "string"
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Response 200"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/def-0"
+                }
+              }
+            },
+            "description": "Response 404"
+          }
+        }
+      }
+    },
+    "/v2/user/id/{id}": {
+      "get": {
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "in": "path",
+            "name": "id",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "id",
+                    "handle",
+                    "name",
+                    "bio",
+                    "banner",
+                    "profilePicture",
+                    "twitter",
+                    "solanaAddress",
+                    "evmAddress"
+                  ],
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "format": "uuid"
+                    },
+                    "handle": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": [
+                        "null",
+                        "string"
+                      ]
+                    },
+                    "bio": {
+                      "type": [
+                        "null",
+                        "string"
+                      ]
+                    },
+                    "banner": {
+                      "type": [
+                        "null",
+                        "string"
+                      ]
+                    },
+                    "profilePicture": {
+                      "type": [
+                        "null",
+                        "string"
+                      ]
+                    },
+                    "twitter": {
+                      "type": [
+                        "null",
+                        "string"
+                      ]
+                    },
+                    "solanaAddress": {
+                      "type": [
+                        "null",
+                        "string"
+                      ]
+                    },
+                    "evmAddress": {
+                      "type": [
+                        "null",
+                        "string"
+                      ]
+                    },
+                    "socials": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "provider",
+                          "subject",
+                          "handle"
+                        ],
+                        "properties": {
+                          "provider": {
+                            "type": "string"
+                          },
+                          "subject": {
+                            "type": "string"
+                          },
+                          "handle": {
+                            "type": [
+                              "null",
+                              "string"
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Response 200"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/def-0"
+                }
+              }
+            },
+            "description": "Response 404"
+          }
+        }
+      }
+    },
+    "/v2/user/handle/{handle}/resolve": {
+      "post": {
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 64
+            },
+            "in": "path",
+            "name": "handle",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "id",
+                    "handle",
+                    "name",
+                    "bio",
+                    "banner",
+                    "profilePicture",
+                    "twitter",
+                    "solanaAddress",
+                    "evmAddress"
+                  ],
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "format": "uuid"
+                    },
+                    "handle": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": [
+                        "null",
+                        "string"
+                      ]
+                    },
+                    "bio": {
+                      "type": [
+                        "null",
+                        "string"
+                      ]
+                    },
+                    "banner": {
+                      "type": [
+                        "null",
+                        "string"
+                      ]
+                    },
+                    "profilePicture": {
+                      "type": [
+                        "null",
+                        "string"
+                      ]
+                    },
+                    "twitter": {
+                      "type": [
+                        "null",
+                        "string"
+                      ]
+                    },
+                    "solanaAddress": {
+                      "type": [
+                        "null",
+                        "string"
+                      ]
+                    },
+                    "evmAddress": {
+                      "type": [
+                        "null",
+                        "string"
+                      ]
+                    },
+                    "socials": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "provider",
+                          "subject",
+                          "handle"
+                        ],
+                        "properties": {
+                          "provider": {
+                            "type": "string"
+                          },
+                          "subject": {
+                            "type": "string"
+                          },
+                          "handle": {
+                            "type": [
+                              "null",
+                              "string"
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Response 200"
+          },
+          "202": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "pending",
+                    "reason"
+                  ],
+                  "properties": {
+                    "pending": {
+                      "type": "boolean",
+                      "enum": [
+                        true
+                      ]
+                    },
+                    "reason": {
+                      "type": "string",
+                      "enum": [
+                        "queued",
+                        "timeout",
+                        "unavailable",
+                        "rate_limited",
+                        "no_preview",
+                        "not_ingested"
+                      ]
+                    },
+                    "retryable": {
+                      "type": "boolean"
+                    },
+                    "retryAfterSeconds": {
+                      "type": "integer"
+                    },
+                    "position": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Response 202"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/def-0"
+                }
+              }
+            },
+            "description": "Response 404"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/def-0"
+                }
+              }
+            },
+            "description": "Response 429"
+          }
+        }
+      }
+    },
+    "/v2/user/handle/{handle}/pnl": {
+      "get": {
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 64
+            },
+            "in": "path",
+            "name": "handle",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "handle",
+                    "wallet",
+                    "evmWallet",
+                    "updatedAt",
+                    "windows"
+                  ],
+                  "properties": {
+                    "handle": {
+                      "type": "string"
+                    },
+                    "displayName": {
+                      "type": [
+                        "null",
+                        "string"
+                      ]
+                    },
+                    "avatarUrl": {
+                      "type": [
+                        "null",
+                        "string"
+                      ]
+                    },
+                    "twitter": {
+                      "type": [
+                        "null",
+                        "string"
+                      ]
+                    },
+                    "followers": {
+                      "type": [
+                        "null",
+                        "integer"
+                      ]
+                    },
+                    "wallet": {
+                      "type": [
+                        "null",
+                        "string"
+                      ]
+                    },
+                    "evmWallet": {
+                      "type": [
+                        "null",
+                        "string"
+                      ]
+                    },
+                    "updatedAt": {
+                      "type": [
+                        "null",
+                        "integer"
+                      ]
+                    },
+                    "windows": {
+                      "type": "object",
+                      "properties": {
+                        "24h": {
+                          "type": [
+                            "null",
+                            "object"
+                          ],
+                          "properties": {
+                            "netUsd": {
+                              "type": "number"
+                            },
+                            "returnPct": {
+                              "type": [
+                                "null",
+                                "number"
+                              ]
+                            },
+                            "volumeUsd": {
+                              "type": "number"
+                            },
+                            "trades": {
+                              "type": "integer"
+                            },
+                            "rank": {
+                              "type": "integer"
+                            }
+                          }
+                        },
+                        "7d": {
+                          "type": [
+                            "null",
+                            "object"
+                          ],
+                          "properties": {
+                            "netUsd": {
+                              "type": "number"
+                            },
+                            "returnPct": {
+                              "type": [
+                                "null",
+                                "number"
+                              ]
+                            },
+                            "volumeUsd": {
+                              "type": "number"
+                            },
+                            "trades": {
+                              "type": "integer"
+                            },
+                            "rank": {
+                              "type": "integer"
+                            }
+                          }
+                        },
+                        "30d": {
+                          "type": [
+                            "null",
+                            "object"
+                          ],
+                          "properties": {
+                            "netUsd": {
+                              "type": "number"
+                            },
+                            "returnPct": {
+                              "type": [
+                                "null",
+                                "number"
+                              ]
+                            },
+                            "volumeUsd": {
+                              "type": "number"
+                            },
+                            "trades": {
+                              "type": "integer"
+                            },
+                            "rank": {
+                              "type": "integer"
+                            }
+                          }
+                        },
+                        "all": {
+                          "type": [
+                            "null",
+                            "object"
+                          ],
+                          "properties": {
+                            "netUsd": {
+                              "type": "number"
+                            },
+                            "returnPct": {
+                              "type": [
+                                "null",
+                                "number"
+                              ]
+                            },
+                            "volumeUsd": {
+                              "type": "number"
+                            },
+                            "trades": {
+                              "type": "integer"
+                            },
+                            "rank": {
+                              "type": "integer"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Response 200"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/def-0"
+                }
+              }
+            },
+            "description": "Response 404"
+          }
+        }
+      }
+    },
+    "/v2/thesis": {
+      "get": {
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "before",
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "count",
+                    "hasMore",
+                    "nextBefore",
+                    "updatedAt",
+                    "items"
+                  ],
+                  "properties": {
+                    "count": {
+                      "type": "integer"
+                    },
+                    "hasMore": {
+                      "type": "boolean"
+                    },
+                    "nextBefore": {
+                      "type": [
+                        "null",
+                        "string"
+                      ]
+                    },
+                    "updatedAt": {
+                      "type": [
+                        "null",
+                        "integer"
+                      ]
+                    },
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "id",
+                          "authorHandle",
+                          "thesis",
+                          "fomoCreatedAt"
+                        ],
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "tokenAddress": {
+                            "type": [
+                              "null",
+                              "string"
+                            ]
+                          },
+                          "tokenNetwork": {
+                            "type": [
+                              "null",
+                              "string"
+                            ]
+                          },
+                          "tokenSymbol": {
+                            "type": [
+                              "null",
+                              "string"
+                            ]
+                          },
+                          "authorId": {
+                            "type": [
+                              "null",
+                              "string"
+                            ]
+                          },
+                          "authorHandle": {
+                            "type": [
+                              "null",
+                              "string"
+                            ]
+                          },
+                          "authorName": {
+                            "type": [
+                              "null",
+                              "string"
+                            ]
+                          },
+                          "authorIsDev": {
+                            "type": [
+                              "null",
+                              "boolean"
+                            ]
+                          },
+                          "thesis": {
+                            "type": [
+                              "null",
+                              "string"
+                            ]
+                          },
+                          "segments": {
+                            "type": [
+                              "null",
+                              "array"
+                            ],
+                            "items": {
+                              "type": "object",
+                              "additionalProperties": true
+                            }
+                          },
+                          "likeCount": {
+                            "type": [
+                              "null",
+                              "integer"
+                            ]
+                          },
+                          "holdingsUsd": {
+                            "type": [
+                              "null",
+                              "number"
+                            ]
+                          },
+                          "authorTradeUsd": {
+                            "type": [
+                              "null",
+                              "number"
+                            ]
+                          },
+                          "pnl": {
+                            "type": [
+                              "null",
+                              "number"
+                            ]
+                          },
+                          "realizedPnlUsd": {
+                            "type": [
+                              "null",
+                              "number"
+                            ]
+                          },
+                          "unrealizedPnlUsd": {
+                            "type": [
+                              "null",
+                              "number"
+                            ]
+                          },
+                          "percentageRealizedPnl": {
+                            "type": [
+                              "null",
+                              "number"
+                            ]
+                          },
+                          "percentageUnrealizedPnl": {
+                            "type": [
+                              "null",
+                              "number"
+                            ]
+                          },
+                          "tokenAmount": {
+                            "type": [
+                              "null",
+                              "number"
+                            ]
+                          },
+                          "closedAt": {
+                            "type": [
+                              "null",
+                              "integer"
+                            ]
+                          },
+                          "fomoCreatedAt": {
+                            "type": [
+                              "null",
+                              "integer"
+                            ]
+                          },
+                          "updatedAt": {
+                            "type": [
+                              "null",
+                              "integer"
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Response 200"
+          }
+        }
+      }
+    },
+    "/v2/thesis/token/{tokenAddress}": {
+      "get": {
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "before",
+            "required": false
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "path",
+            "name": "tokenAddress",
+            "required": true
+          },
+          {
+            "name": "networkId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Optional chain ID to narrow a token lookup."
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "tokenAddress",
+                    "tokenNetwork",
+                    "symbol",
+                    "updatedAt",
+                    "count",
+                    "hasMore",
+                    "nextBefore",
+                    "items"
+                  ],
+                  "properties": {
+                    "tokenAddress": {
+                      "type": "string"
+                    },
+                    "tokenNetwork": {
+                      "type": [
+                        "null",
+                        "string"
+                      ]
+                    },
+                    "symbol": {
+                      "type": [
+                        "null",
+                        "string"
+                      ]
+                    },
+                    "updatedAt": {
+                      "type": [
+                        "null",
+                        "integer"
+                      ]
+                    },
+                    "count": {
+                      "type": "integer"
+                    },
+                    "hasMore": {
+                      "type": "boolean"
+                    },
+                    "nextBefore": {
+                      "type": [
+                        "null",
+                        "string"
+                      ]
+                    },
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "id",
+                          "authorHandle",
+                          "thesis",
+                          "fomoCreatedAt"
+                        ],
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "tokenAddress": {
+                            "type": [
+                              "null",
+                              "string"
+                            ]
+                          },
+                          "tokenNetwork": {
+                            "type": [
+                              "null",
+                              "string"
+                            ]
+                          },
+                          "tokenSymbol": {
+                            "type": [
+                              "null",
+                              "string"
+                            ]
+                          },
+                          "authorId": {
+                            "type": [
+                              "null",
+                              "string"
+                            ]
+                          },
+                          "authorHandle": {
+                            "type": [
+                              "null",
+                              "string"
+                            ]
+                          },
+                          "authorName": {
+                            "type": [
+                              "null",
+                              "string"
+                            ]
+                          },
+                          "authorIsDev": {
+                            "type": [
+                              "null",
+                              "boolean"
+                            ]
+                          },
+                          "thesis": {
+                            "type": [
+                              "null",
+                              "string"
+                            ]
+                          },
+                          "segments": {
+                            "type": [
+                              "null",
+                              "array"
+                            ],
+                            "items": {
+                              "type": "object",
+                              "additionalProperties": true
+                            }
+                          },
+                          "likeCount": {
+                            "type": [
+                              "null",
+                              "integer"
+                            ]
+                          },
+                          "holdingsUsd": {
+                            "type": [
+                              "null",
+                              "number"
+                            ]
+                          },
+                          "authorTradeUsd": {
+                            "type": [
+                              "null",
+                              "number"
+                            ]
+                          },
+                          "pnl": {
+                            "type": [
+                              "null",
+                              "number"
+                            ]
+                          },
+                          "realizedPnlUsd": {
+                            "type": [
+                              "null",
+                              "number"
+                            ]
+                          },
+                          "unrealizedPnlUsd": {
+                            "type": [
+                              "null",
+                              "number"
+                            ]
+                          },
+                          "percentageRealizedPnl": {
+                            "type": [
+                              "null",
+                              "number"
+                            ]
+                          },
+                          "percentageUnrealizedPnl": {
+                            "type": [
+                              "null",
+                              "number"
+                            ]
+                          },
+                          "tokenAmount": {
+                            "type": [
+                              "null",
+                              "number"
+                            ]
+                          },
+                          "closedAt": {
+                            "type": [
+                              "null",
+                              "integer"
+                            ]
+                          },
+                          "fomoCreatedAt": {
+                            "type": [
+                              "null",
+                              "integer"
+                            ]
+                          },
+                          "updatedAt": {
+                            "type": [
+                              "null",
+                              "integer"
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Response 200"
+          }
+        }
+      }
+    },
+    "/v2/thesis/user/{id}": {
+      "get": {
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "before",
+            "required": false
+          },
+          {
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "in": "path",
+            "name": "id",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "userId",
+                    "tokenAddress",
+                    "count",
+                    "hasMore",
+                    "nextBefore",
+                    "updatedAt",
+                    "items"
+                  ],
+                  "properties": {
+                    "userId": {
+                      "type": "string"
+                    },
+                    "tokenAddress": {
+                      "type": [
+                        "null",
+                        "string"
+                      ]
+                    },
+                    "count": {
+                      "type": "integer"
+                    },
+                    "hasMore": {
+                      "type": "boolean"
+                    },
+                    "nextBefore": {
+                      "type": [
+                        "null",
+                        "string"
+                      ]
+                    },
+                    "updatedAt": {
+                      "type": [
+                        "null",
+                        "integer"
+                      ]
+                    },
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "id",
+                          "authorHandle",
+                          "thesis",
+                          "fomoCreatedAt"
+                        ],
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "tokenAddress": {
+                            "type": [
+                              "null",
+                              "string"
+                            ]
+                          },
+                          "tokenNetwork": {
+                            "type": [
+                              "null",
+                              "string"
+                            ]
+                          },
+                          "tokenSymbol": {
+                            "type": [
+                              "null",
+                              "string"
+                            ]
+                          },
+                          "authorId": {
+                            "type": [
+                              "null",
+                              "string"
+                            ]
+                          },
+                          "authorHandle": {
+                            "type": [
+                              "null",
+                              "string"
+                            ]
+                          },
+                          "authorName": {
+                            "type": [
+                              "null",
+                              "string"
+                            ]
+                          },
+                          "authorIsDev": {
+                            "type": [
+                              "null",
+                              "boolean"
+                            ]
+                          },
+                          "thesis": {
+                            "type": [
+                              "null",
+                              "string"
+                            ]
+                          },
+                          "segments": {
+                            "type": [
+                              "null",
+                              "array"
+                            ],
+                            "items": {
+                              "type": "object",
+                              "additionalProperties": true
+                            }
+                          },
+                          "likeCount": {
+                            "type": [
+                              "null",
+                              "integer"
+                            ]
+                          },
+                          "holdingsUsd": {
+                            "type": [
+                              "null",
+                              "number"
+                            ]
+                          },
+                          "authorTradeUsd": {
+                            "type": [
+                              "null",
+                              "number"
+                            ]
+                          },
+                          "pnl": {
+                            "type": [
+                              "null",
+                              "number"
+                            ]
+                          },
+                          "realizedPnlUsd": {
+                            "type": [
+                              "null",
+                              "number"
+                            ]
+                          },
+                          "unrealizedPnlUsd": {
+                            "type": [
+                              "null",
+                              "number"
+                            ]
+                          },
+                          "percentageRealizedPnl": {
+                            "type": [
+                              "null",
+                              "number"
+                            ]
+                          },
+                          "percentageUnrealizedPnl": {
+                            "type": [
+                              "null",
+                              "number"
+                            ]
+                          },
+                          "tokenAmount": {
+                            "type": [
+                              "null",
+                              "number"
+                            ]
+                          },
+                          "closedAt": {
+                            "type": [
+                              "null",
+                              "integer"
+                            ]
+                          },
+                          "fomoCreatedAt": {
+                            "type": [
+                              "null",
+                              "integer"
+                            ]
+                          },
+                          "updatedAt": {
+                            "type": [
+                              "null",
+                              "integer"
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Response 200"
+          }
+        }
+      }
+    },
+    "/v2/thesis/user/{id}/token/{tokenAddress}": {
+      "get": {
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "before",
+            "required": false
+          },
+          {
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "in": "path",
+            "name": "id",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "path",
+            "name": "tokenAddress",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "userId",
+                    "tokenAddress",
+                    "count",
+                    "hasMore",
+                    "nextBefore",
+                    "updatedAt",
+                    "items"
+                  ],
+                  "properties": {
+                    "userId": {
+                      "type": "string"
+                    },
+                    "tokenAddress": {
+                      "type": [
+                        "null",
+                        "string"
+                      ]
+                    },
+                    "count": {
+                      "type": "integer"
+                    },
+                    "hasMore": {
+                      "type": "boolean"
+                    },
+                    "nextBefore": {
+                      "type": [
+                        "null",
+                        "string"
+                      ]
+                    },
+                    "updatedAt": {
+                      "type": [
+                        "null",
+                        "integer"
+                      ]
+                    },
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "id",
+                          "authorHandle",
+                          "thesis",
+                          "fomoCreatedAt"
+                        ],
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "tokenAddress": {
+                            "type": [
+                              "null",
+                              "string"
+                            ]
+                          },
+                          "tokenNetwork": {
+                            "type": [
+                              "null",
+                              "string"
+                            ]
+                          },
+                          "tokenSymbol": {
+                            "type": [
+                              "null",
+                              "string"
+                            ]
+                          },
+                          "authorId": {
+                            "type": [
+                              "null",
+                              "string"
+                            ]
+                          },
+                          "authorHandle": {
+                            "type": [
+                              "null",
+                              "string"
+                            ]
+                          },
+                          "authorName": {
+                            "type": [
+                              "null",
+                              "string"
+                            ]
+                          },
+                          "authorIsDev": {
+                            "type": [
+                              "null",
+                              "boolean"
+                            ]
+                          },
+                          "thesis": {
+                            "type": [
+                              "null",
+                              "string"
+                            ]
+                          },
+                          "segments": {
+                            "type": [
+                              "null",
+                              "array"
+                            ],
+                            "items": {
+                              "type": "object",
+                              "additionalProperties": true
+                            }
+                          },
+                          "likeCount": {
+                            "type": [
+                              "null",
+                              "integer"
+                            ]
+                          },
+                          "holdingsUsd": {
+                            "type": [
+                              "null",
+                              "number"
+                            ]
+                          },
+                          "authorTradeUsd": {
+                            "type": [
+                              "null",
+                              "number"
+                            ]
+                          },
+                          "pnl": {
+                            "type": [
+                              "null",
+                              "number"
+                            ]
+                          },
+                          "realizedPnlUsd": {
+                            "type": [
+                              "null",
+                              "number"
+                            ]
+                          },
+                          "unrealizedPnlUsd": {
+                            "type": [
+                              "null",
+                              "number"
+                            ]
+                          },
+                          "percentageRealizedPnl": {
+                            "type": [
+                              "null",
+                              "number"
+                            ]
+                          },
+                          "percentageUnrealizedPnl": {
+                            "type": [
+                              "null",
+                              "number"
+                            ]
+                          },
+                          "tokenAmount": {
+                            "type": [
+                              "null",
+                              "number"
+                            ]
+                          },
+                          "closedAt": {
+                            "type": [
+                              "null",
+                              "integer"
+                            ]
+                          },
+                          "fomoCreatedAt": {
+                            "type": [
+                              "null",
+                              "integer"
+                            ]
+                          },
+                          "updatedAt": {
+                            "type": [
+                              "null",
+                              "integer"
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Response 200"
+          }
+        }
+      }
+    },
+    "/v2/leaderboard/traders-fomoscan": {
+      "get": {
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "24h",
+                "7d",
+                "30d",
+                "all"
+              ],
+              "default": "24h"
+            },
+            "in": "query",
+            "name": "window",
+            "required": false
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "best",
+                "worst"
+              ],
+              "default": "best"
+            },
+            "in": "query",
+            "name": "order",
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "window",
+                    "order",
+                    "updatedAt",
+                    "total",
+                    "count",
+                    "entries"
+                  ],
+                  "properties": {
+                    "window": {
+                      "type": "string",
+                      "enum": [
+                        "24h",
+                        "7d",
+                        "30d",
+                        "all"
+                      ]
+                    },
+                    "order": {
+                      "type": "string",
+                      "enum": [
+                        "best",
+                        "worst"
+                      ]
+                    },
+                    "updatedAt": {
+                      "type": "integer"
+                    },
+                    "total": {
+                      "type": "integer"
+                    },
+                    "count": {
+                      "type": "integer"
+                    },
+                    "entries": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "rank",
+                          "handle",
+                          "wallet",
+                          "evmWallet",
+                          "netUsd",
+                          "volumeUsd",
+                          "trades"
+                        ],
+                        "properties": {
+                          "rank": {
+                            "type": "integer"
+                          },
+                          "handle": {
+                            "type": "string"
+                          },
+                          "displayName": {
+                            "type": [
+                              "null",
+                              "string"
+                            ]
+                          },
+                          "avatarUrl": {
+                            "type": [
+                              "null",
+                              "string"
+                            ]
+                          },
+                          "twitter": {
+                            "type": [
+                              "null",
+                              "string"
+                            ]
+                          },
+                          "followers": {
+                            "type": [
+                              "null",
+                              "integer"
+                            ]
+                          },
+                          "wallet": {
+                            "type": [
+                              "null",
+                              "string"
+                            ]
+                          },
+                          "evmWallet": {
+                            "type": [
+                              "null",
+                              "string"
+                            ]
+                          },
+                          "netUsd": {
+                            "type": "number"
+                          },
+                          "returnPct": {
+                            "type": [
+                              "null",
+                              "number"
+                            ]
+                          },
+                          "volumeUsd": {
+                            "type": "number"
+                          },
+                          "trades": {
+                            "type": "integer"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Response 200"
+          }
+        }
+      }
+    },
+    "/v2/leaderboard/traders": {
+      "get": {
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "24h",
+                "7d",
+                "30d",
+                "all"
+              ]
+            },
+            "in": "query",
+            "name": "window",
+            "required": false
+          },
+          {
+            "schema": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "in": "query",
+            "name": "at",
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "board",
+                    "window",
+                    "capturedAt",
+                    "count",
+                    "entries"
+                  ],
+                  "properties": {
+                    "board": {
+                      "type": "string",
+                      "enum": [
+                        "traders",
+                        "clans",
+                        "tokens/most-held",
+                        "tokens/trending",
+                        "tokens/graduated"
+                      ]
+                    },
+                    "window": {
+                      "type": [
+                        "null",
+                        "string"
+                      ]
+                    },
+                    "capturedAt": {
+                      "type": "integer"
+                    },
+                    "count": {
+                      "type": "integer"
+                    },
+                    "entries": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "rank",
+                          "id"
+                        ],
+                        "properties": {
+                          "rank": {
+                            "type": "integer"
+                          },
+                          "id": {
+                            "type": "string"
+                          },
+                          "handle": {
+                            "type": [
+                              "null",
+                              "string"
+                            ]
+                          },
+                          "label": {
+                            "type": [
+                              "null",
+                              "string"
+                            ]
+                          },
+                          "avatarUrl": {
+                            "type": [
+                              "null",
+                              "string"
+                            ]
+                          },
+                          "pnl": {
+                            "type": [
+                              "null",
+                              "number"
+                            ]
+                          },
+                          "volume": {
+                            "type": [
+                              "null",
+                              "number"
+                            ]
+                          },
+                          "followers": {
+                            "type": [
+                              "null",
+                              "integer"
+                            ]
+                          },
+                          "numTrades": {
+                            "type": [
+                              "null",
+                              "integer"
+                            ]
+                          },
+                          "memberCount": {
+                            "type": [
+                              "null",
+                              "integer"
+                            ]
+                          },
+                          "marketCap": {
+                            "type": [
+                              "null",
+                              "number"
+                            ]
+                          },
+                          "price": {
+                            "type": [
+                              "null",
+                              "number"
+                            ]
+                          },
+                          "liquidity": {
+                            "type": [
+                              "null",
+                              "number"
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Response 200"
+          }
+        }
+      }
+    },
+    "/v2/leaderboard/clans": {
+      "get": {
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "24h",
+                "7d",
+                "30d"
+              ]
+            },
+            "in": "query",
+            "name": "window",
+            "required": false
+          },
+          {
+            "schema": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "in": "query",
+            "name": "at",
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "board",
+                    "window",
+                    "capturedAt",
+                    "count",
+                    "entries"
+                  ],
+                  "properties": {
+                    "board": {
+                      "type": "string",
+                      "enum": [
+                        "traders",
+                        "clans",
+                        "tokens/most-held",
+                        "tokens/trending",
+                        "tokens/graduated"
+                      ]
+                    },
+                    "window": {
+                      "type": [
+                        "null",
+                        "string"
+                      ]
+                    },
+                    "capturedAt": {
+                      "type": "integer"
+                    },
+                    "count": {
+                      "type": "integer"
+                    },
+                    "entries": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "rank",
+                          "id"
+                        ],
+                        "properties": {
+                          "rank": {
+                            "type": "integer"
+                          },
+                          "id": {
+                            "type": "string"
+                          },
+                          "handle": {
+                            "type": [
+                              "null",
+                              "string"
+                            ]
+                          },
+                          "label": {
+                            "type": [
+                              "null",
+                              "string"
+                            ]
+                          },
+                          "avatarUrl": {
+                            "type": [
+                              "null",
+                              "string"
+                            ]
+                          },
+                          "pnl": {
+                            "type": [
+                              "null",
+                              "number"
+                            ]
+                          },
+                          "volume": {
+                            "type": [
+                              "null",
+                              "number"
+                            ]
+                          },
+                          "followers": {
+                            "type": [
+                              "null",
+                              "integer"
+                            ]
+                          },
+                          "numTrades": {
+                            "type": [
+                              "null",
+                              "integer"
+                            ]
+                          },
+                          "memberCount": {
+                            "type": [
+                              "null",
+                              "integer"
+                            ]
+                          },
+                          "marketCap": {
+                            "type": [
+                              "null",
+                              "number"
+                            ]
+                          },
+                          "price": {
+                            "type": [
+                              "null",
+                              "number"
+                            ]
+                          },
+                          "liquidity": {
+                            "type": [
+                              "null",
+                              "number"
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Response 200"
+          }
+        }
+      }
+    },
+    "/v2/leaderboard/tokens/most-held": {
+      "get": {
+        "parameters": [
+          {
+            "schema": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "in": "query",
+            "name": "at",
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "board",
+                    "window",
+                    "capturedAt",
+                    "count",
+                    "entries"
+                  ],
+                  "properties": {
+                    "board": {
+                      "type": "string",
+                      "enum": [
+                        "traders",
+                        "clans",
+                        "tokens/most-held",
+                        "tokens/trending",
+                        "tokens/graduated"
+                      ]
+                    },
+                    "window": {
+                      "type": [
+                        "null",
+                        "string"
+                      ]
+                    },
+                    "capturedAt": {
+                      "type": "integer"
+                    },
+                    "count": {
+                      "type": "integer"
+                    },
+                    "entries": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "rank",
+                          "id"
+                        ],
+                        "properties": {
+                          "rank": {
+                            "type": "integer"
+                          },
+                          "id": {
+                            "type": "string"
+                          },
+                          "handle": {
+                            "type": [
+                              "null",
+                              "string"
+                            ]
+                          },
+                          "label": {
+                            "type": [
+                              "null",
+                              "string"
+                            ]
+                          },
+                          "avatarUrl": {
+                            "type": [
+                              "null",
+                              "string"
+                            ]
+                          },
+                          "pnl": {
+                            "type": [
+                              "null",
+                              "number"
+                            ]
+                          },
+                          "volume": {
+                            "type": [
+                              "null",
+                              "number"
+                            ]
+                          },
+                          "followers": {
+                            "type": [
+                              "null",
+                              "integer"
+                            ]
+                          },
+                          "numTrades": {
+                            "type": [
+                              "null",
+                              "integer"
+                            ]
+                          },
+                          "memberCount": {
+                            "type": [
+                              "null",
+                              "integer"
+                            ]
+                          },
+                          "marketCap": {
+                            "type": [
+                              "null",
+                              "number"
+                            ]
+                          },
+                          "price": {
+                            "type": [
+                              "null",
+                              "number"
+                            ]
+                          },
+                          "liquidity": {
+                            "type": [
+                              "null",
+                              "number"
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Response 200"
+          }
+        }
+      }
+    },
+    "/v2/leaderboard/tokens/trending": {
+      "get": {
+        "parameters": [
+          {
+            "schema": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "in": "query",
+            "name": "at",
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "board",
+                    "window",
+                    "capturedAt",
+                    "count",
+                    "entries"
+                  ],
+                  "properties": {
+                    "board": {
+                      "type": "string",
+                      "enum": [
+                        "traders",
+                        "clans",
+                        "tokens/most-held",
+                        "tokens/trending",
+                        "tokens/graduated"
+                      ]
+                    },
+                    "window": {
+                      "type": [
+                        "null",
+                        "string"
+                      ]
+                    },
+                    "capturedAt": {
+                      "type": "integer"
+                    },
+                    "count": {
+                      "type": "integer"
+                    },
+                    "entries": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "rank",
+                          "id"
+                        ],
+                        "properties": {
+                          "rank": {
+                            "type": "integer"
+                          },
+                          "id": {
+                            "type": "string"
+                          },
+                          "handle": {
+                            "type": [
+                              "null",
+                              "string"
+                            ]
+                          },
+                          "label": {
+                            "type": [
+                              "null",
+                              "string"
+                            ]
+                          },
+                          "avatarUrl": {
+                            "type": [
+                              "null",
+                              "string"
+                            ]
+                          },
+                          "pnl": {
+                            "type": [
+                              "null",
+                              "number"
+                            ]
+                          },
+                          "volume": {
+                            "type": [
+                              "null",
+                              "number"
+                            ]
+                          },
+                          "followers": {
+                            "type": [
+                              "null",
+                              "integer"
+                            ]
+                          },
+                          "numTrades": {
+                            "type": [
+                              "null",
+                              "integer"
+                            ]
+                          },
+                          "memberCount": {
+                            "type": [
+                              "null",
+                              "integer"
+                            ]
+                          },
+                          "marketCap": {
+                            "type": [
+                              "null",
+                              "number"
+                            ]
+                          },
+                          "price": {
+                            "type": [
+                              "null",
+                              "number"
+                            ]
+                          },
+                          "liquidity": {
+                            "type": [
+                              "null",
+                              "number"
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Response 200"
+          }
+        }
+      }
+    },
+    "/v2/leaderboard/tokens/graduated": {
+      "get": {
+        "parameters": [
+          {
+            "schema": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "in": "query",
+            "name": "at",
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "board",
+                    "window",
+                    "capturedAt",
+                    "count",
+                    "entries"
+                  ],
+                  "properties": {
+                    "board": {
+                      "type": "string",
+                      "enum": [
+                        "traders",
+                        "clans",
+                        "tokens/most-held",
+                        "tokens/trending",
+                        "tokens/graduated"
+                      ]
+                    },
+                    "window": {
+                      "type": [
+                        "null",
+                        "string"
+                      ]
+                    },
+                    "capturedAt": {
+                      "type": "integer"
+                    },
+                    "count": {
+                      "type": "integer"
+                    },
+                    "entries": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "rank",
+                          "id"
+                        ],
+                        "properties": {
+                          "rank": {
+                            "type": "integer"
+                          },
+                          "id": {
+                            "type": "string"
+                          },
+                          "handle": {
+                            "type": [
+                              "null",
+                              "string"
+                            ]
+                          },
+                          "label": {
+                            "type": [
+                              "null",
+                              "string"
+                            ]
+                          },
+                          "avatarUrl": {
+                            "type": [
+                              "null",
+                              "string"
+                            ]
+                          },
+                          "pnl": {
+                            "type": [
+                              "null",
+                              "number"
+                            ]
+                          },
+                          "volume": {
+                            "type": [
+                              "null",
+                              "number"
+                            ]
+                          },
+                          "followers": {
+                            "type": [
+                              "null",
+                              "integer"
+                            ]
+                          },
+                          "numTrades": {
+                            "type": [
+                              "null",
+                              "integer"
+                            ]
+                          },
+                          "memberCount": {
+                            "type": [
+                              "null",
+                              "integer"
+                            ]
+                          },
+                          "marketCap": {
+                            "type": [
+                              "null",
+                              "number"
+                            ]
+                          },
+                          "price": {
+                            "type": [
+                              "null",
+                              "number"
+                            ]
+                          },
+                          "liquidity": {
+                            "type": [
+                              "null",
+                              "number"
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Response 200"
+          }
+        }
+      }
+    },
+    "/v2/me": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Self-hosted instance capabilities",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/ws": {
+      "get": {
+        "responses": {
+          "101": {
+            "description": "Response 101"
+          },
+          "401": {
+            "description": "Response 401"
+          },
+          "404": {
+            "description": "Response 404"
+          }
+        }
+      }
+    },
+    "/healthz": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ErrorBody": {
+        "type": "object",
+        "required": [
+          "error"
+        ],
+        "properties": {
+          "error": {
+            "type": "object",
+            "required": [
+              "code",
+              "message"
+            ],
+            "properties": {
+              "code": {
+                "type": "string",
+                "enum": [
+                  "NOT_FOUND",
+                  "VALIDATION_ERROR",
+                  "QUERY_TOO_SHORT",
+                  "RATE_LIMITED",
+                  "UNAUTHORIZED",
+                  "QUEUE_UNAVAILABLE",
+                  "SCRAPER_UNHEALTHY",
+                  "INTERNAL_ERROR",
+                  "NOT_IMPLEMENTED",
+                  "EVM_REQUIRES_VERIFIED_SVM",
+                  "SYNC_ALREADY_RUNNING",
+                  "TIMEOUT",
+                  "BAD_REQUEST",
+                  "FORBIDDEN",
+                  "CONFLICT",
+                  "FLEET_UNAVAILABLE",
+                  "FORBIDDEN_SCOPE",
+                  "QUOTA_EXCEEDED",
+                  "B2B_DISABLED",
+                  "IDEMPOTENCY_CONFLICT",
+                  "NOT_OBSERVED"
+                ]
+              },
+              "message": {
+                "type": "string"
+              },
+              "retryAfter": {
+                "type": "integer"
+              },
+              "addUrl": {
+                "type": "string"
+              },
+              "syncId": {
+                "type": "string"
+              },
+              "pollUrl": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "def-0": {
+        "type": "object",
+        "required": [
+          "error"
+        ],
+        "properties": {
+          "error": {
+            "type": "object",
+            "required": [
+              "code",
+              "message"
+            ],
+            "properties": {
+              "code": {
+                "type": "string",
+                "enum": [
+                  "NOT_FOUND",
+                  "VALIDATION_ERROR",
+                  "QUERY_TOO_SHORT",
+                  "RATE_LIMITED",
+                  "UNAUTHORIZED",
+                  "QUEUE_UNAVAILABLE",
+                  "SCRAPER_UNHEALTHY",
+                  "INTERNAL_ERROR",
+                  "NOT_IMPLEMENTED",
+                  "EVM_REQUIRES_VERIFIED_SVM",
+                  "SYNC_ALREADY_RUNNING",
+                  "TIMEOUT",
+                  "BAD_REQUEST",
+                  "FORBIDDEN",
+                  "CONFLICT",
+                  "FLEET_UNAVAILABLE",
+                  "FORBIDDEN_SCOPE",
+                  "QUOTA_EXCEEDED",
+                  "B2B_DISABLED",
+                  "IDEMPOTENCY_CONFLICT",
+                  "NOT_OBSERVED"
+                ]
+              },
+              "message": {
+                "type": "string"
+              },
+              "retryAfter": {
+                "type": "integer"
+              },
+              "addUrl": {
+                "type": "string"
+              },
+              "syncId": {
+                "type": "string"
+              },
+              "pollUrl": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "title": "ErrorBody"
+      }
+    },
+    "securitySchemes": {
+      "apiKey": {
+        "type": "http",
+        "scheme": "bearer",
+        "description": "Optional self-hosted API key, configured by the operator."
+      }
+    }
+  }
+}

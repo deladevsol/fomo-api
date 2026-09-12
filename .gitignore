@@ -1,0 +1,6 @@
+/fomo-api
+/bin/
+.env
+.env.*
+*.log
+coverage.out
