@@ -14,9 +14,46 @@ import (
 var specification []byte
 
 var Routes = []string{
-	"GET /v2/user/handle/{handle}", "GET /v2/user/id/{id}", "GET /v2/user/wallet/{address}", "POST /v2/user/handle/{handle}/resolve", "GET /v2/user/handle/{handle}/pnl",
-	"GET /v2/thesis", "GET /v2/thesis/token/{tokenAddress}", "GET /v2/thesis/user/{id}", "GET /v2/thesis/user/{id}/token/{tokenAddress}",
-	"GET /v2/leaderboard/traders-fomoscan", "GET /v2/leaderboard/traders", "GET /v2/leaderboard/clans", "GET /v2/leaderboard/tokens/most-held", "GET /v2/leaderboard/tokens/trending", "GET /v2/leaderboard/tokens/graduated", "GET /v2/me", "GET /v2/ws",
+	"GET /v2/status",
+	"GET /v2/users/handle/{handle}/theses",
+	"GET /v2/users/handle/{handle}",
+	"GET /v2/users/id/{id}",
+	"GET /v2/users/wallet/{address}",
+	"POST /v2/users/handle/{handle}/resolve",
+	"GET /v2/users/handle/{handle}/pnl",
+	"GET /v2/theses",
+	"GET /v2/tokens/{tokenAddress}/theses",
+	"GET /v2/users/id/{id}/theses",
+	"GET /v2/users/id/{id}/tokens/{tokenAddress}/theses",
+	"GET /v2/leaderboards/trader-pnl",
+	"GET /v2/leaderboards/traders",
+	"GET /v2/leaderboards/clans",
+	"GET /v2/leaderboards/tokens/most-held",
+	"GET /v2/leaderboards/tokens/trending",
+	"GET /v2/leaderboards/tokens/graduated",
+	"GET /v2/info",
+	"GET /v2/stream",
+	"GET /v2/users/search",
+	"GET /v2/user/handle/{handle}",
+	"GET /v2/user/wallet/{address}",
+	"GET /v2/user/id/{id}",
+	"POST /v2/user/handle/{handle}/resolve",
+	"GET /v2/user/handle/{handle}/pnl",
+	"GET /v2/thesis",
+	"GET /v2/thesis/token/{tokenAddress}",
+	"GET /v2/thesis/user/{id}",
+	"GET /v2/thesis/user/{id}/token/{tokenAddress}",
+	"GET /v2/leaderboard/traders-fomoscan",
+	"GET /v2/leaderboard/traders",
+	"GET /v2/leaderboard/clans",
+	"GET /v2/leaderboard/tokens/most-held",
+	"GET /v2/leaderboard/tokens/trending",
+	"GET /v2/leaderboard/tokens/graduated",
+	"GET /v2/me",
+	"GET /v2/ws",
+	"GET /v2/stats",
+	"GET /v2/user/handle/{handle}/thesis",
+	"GET /v2/thesis/handle/{handle}",
 }
 
 func New(base, key string) (http.Handler, error) {
@@ -63,4 +100,5 @@ func New(base, key string) (http.Handler, error) {
 	return mux, nil
 }
 
-const docs = `<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Fomo API</title><style>body{font:16px system-ui;max-width:900px;margin:48px auto;padding:0 24px;background:#101318;color:#e4e8ee}a{color:#9dbbff}code{font:14px monospace}td{padding:12px;border-bottom:1px solid #303843}table{border-collapse:collapse;width:100%}</style><h1>Fomo API</h1><p>Free access to public Fomo data, powered by <a href="https://pootracker.app">PooTracker</a>.</p><p><a href="/openapi.json">OpenAPI schema</a> · <a href="https://github.com/deladevsol/fomo-api">Source</a></p><table id="routes"></table><script>fetch('/openapi.json').then(r=>r.json()).then(s=>{for(const[p,ops]of Object.entries(s.paths))for(const m of Object.keys(ops)){const tr=document.createElement('tr');for(const v of [m.toUpperCase(),p]){const td=document.createElement('td');td.textContent=v;tr.append(td)}document.getElementById('routes').append(tr)}})</script></html>`
+//go:embed docs.html
+var docs string

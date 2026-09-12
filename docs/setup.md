@@ -5,8 +5,8 @@ Go 1.24 or newer is required. The project uses the Go standard library and has n
 ```sh
 go build -o fomo-api ./cmd/fomo-api
 ./fomo-api user ogle
-./fomo-api get /v2/thesis
-./fomo-api get '/v2/leaderboard/traders?window=7d'
+./fomo-api get /v2/theses
+./fomo-api get '/v2/leaderboards/traders?window=7d'
 ```
 
 The default API is `https://fomo-public.pootracker.app`. Use `--url` before the positional argument to select another compatible endpoint.
@@ -15,7 +15,7 @@ The default API is `https://fomo-public.pootracker.app`. Use `--url` before the 
 
 ```sh
 ./fomo-api serve --listen 127.0.0.1:8787
-curl http://127.0.0.1:8787/v2/thesis
+curl http://127.0.0.1:8787/v2/theses
 ```
 
 The local server forwards supported REST and WebSocket routes to the hosted API. It reuses upstream connections, preserves status codes and pagination, and does not forward caller cookies or credentials. Set `FOMO_PUBLIC_API_KEY` if your chosen upstream requires a key.

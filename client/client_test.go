@@ -10,7 +10,7 @@ import (
 
 func TestThesisCursorAndNullableValues(t *testing.T) {
 	s := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		if r.URL.Path != "/v2/thesis/user/user-1/token/TokenCaseSensitive" || r.URL.Query().Get("before") != "cursor+/=" {
+		if r.URL.Path != "/v2/users/id/user-1/tokens/TokenCaseSensitive/theses" || r.URL.Query().Get("before") != "cursor+/=" {
 			t.Errorf("incorrect URL: %s", r.URL)
 		}
 		w.Header().Set("Content-Type", "application/json")
